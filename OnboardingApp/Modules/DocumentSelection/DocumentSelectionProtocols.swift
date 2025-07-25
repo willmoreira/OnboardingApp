@@ -1,3 +1,5 @@
+import CoreKit
+
 protocol DocumentSelectionViewProtocol: AnyObject {
     func showDocuments(_ documents: [Document])
     func saveSelectedCountryAndDocument(country: Country, document: Document)

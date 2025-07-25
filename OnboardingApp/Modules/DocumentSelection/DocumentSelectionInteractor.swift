@@ -1,3 +1,5 @@
+import CoreKit
+
 final class DocumentSelectionInteractor {
     
     // MARK: - Properties

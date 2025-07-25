@@ -1,4 +1,5 @@
 import UIKit
+import CoreKit
 
 protocol DocumentCaptureViewProtocol: AnyObject {
     func showCapturedImage(_ image: UIImage)

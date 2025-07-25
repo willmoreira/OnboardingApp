@@ -1,3 +1,5 @@
+import CoreKit
+
 final class DocumentSelectionPresenter {
     
     // MARK: - VIP Properties

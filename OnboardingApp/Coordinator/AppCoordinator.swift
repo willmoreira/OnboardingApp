@@ -1,4 +1,5 @@
 import UIKit
+import CoreKit
 
 protocol Coordinator {
     var navigationController: UINavigationController { get set }

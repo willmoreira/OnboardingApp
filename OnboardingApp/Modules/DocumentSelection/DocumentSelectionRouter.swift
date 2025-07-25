@@ -1,5 +1,7 @@
 import UIKit
 
+import CoreKit
+
 final class DocumentSelectionRouter: DocumentSelectionRouterProtocol {
     
     // MARK: - Properties
