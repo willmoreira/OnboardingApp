@@ -1,6 +1,7 @@
 import UIKit
 
 final class DocumentSelectionRouter: DocumentSelectionRouterProtocol {
+    
     weak var coordinator: AppCoordinator?
 
     static func createModule(coordinator: AppCoordinator, country: Country) -> UIViewController {

@@ -1,6 +1,5 @@
-
-
 final class DocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
+    
     weak var presenter: DocumentSelectionInteractorOutputProtocol?
     private let country: Country
 
@@ -9,23 +8,22 @@ final class DocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
     }
 
     func fetchDocuments() {
-        // Aqui você simula com base no país selecionado
         let documents: [Document]
 
         switch country.name {
         case "Brasil":
             documents = [
-                Document(name: "RG", iconName: "doc_rg"),
-                Document(name: "CNH", iconName: "doc_cnh")
+                Document(name: "RG", iconName: "person.text.rectangle"),
+                Document(name: "CNH", iconName: "car.fill")
             ]
         case "Estados Unidos":
             documents = [
-                Document(name: "Driver License", iconName: "doc_dl"),
-                Document(name: "Passport", iconName: "doc_passport")
+                Document(name: "Driver License", iconName: "car.circle"),
+                Document(name: "Passaporte", iconName: "globe.americas.fill")
             ]
         default:
             documents = [
-                Document(name: "Passport", iconName: "doc_passport")
+                Document(name: "Passport", iconName: "globe")
             ]
         }
 

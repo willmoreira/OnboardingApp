@@ -22,6 +22,7 @@ final class DocumentCapturePresenter {
 }
 
 extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
+    
     func didTapCapture() {
         if let image = UIImage(named: "doc_sample") {
             capturedImage = image
@@ -40,7 +41,6 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
         view?.showLoading(true)
         interactor.uploadDocument(image)
     }
-
 }
 
 extension DocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {

@@ -1,4 +1,5 @@
 final class DocumentSelectionPresenter {
+    
     weak var view: DocumentSelectionViewProtocol?
     private let interactor: DocumentSelectionInteractorProtocol
     private let router: DocumentSelectionRouterProtocol
@@ -14,6 +15,7 @@ final class DocumentSelectionPresenter {
 }
 
 extension DocumentSelectionPresenter: DocumentSelectionPresenterProtocol {
+    
     func viewDidLoad() {
         interactor.fetchDocuments()
     }
@@ -26,6 +28,7 @@ extension DocumentSelectionPresenter: DocumentSelectionPresenterProtocol {
 }
 
 extension DocumentSelectionPresenter: DocumentSelectionInteractorOutputProtocol {
+    
     func didFetchDocuments(_ documents: [Document], _ country: Country) {
         self.selectedCountry = country
         view?.showDocuments(documents)

@@ -1,6 +1,7 @@
 import UIKit
 
 final class DocumentCaptureRouter: DocumentCaptureRouterProtocol {
+    
     weak var coordinator: AppCoordinator?
 
     static func createModule(coordinator: AppCoordinator) -> UIViewController {
