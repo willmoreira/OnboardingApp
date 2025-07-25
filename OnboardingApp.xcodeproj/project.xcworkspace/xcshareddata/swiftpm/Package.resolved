@@ -1,0 +1,15 @@
+{
+  "originHash" : "2da639078eedcd604550e43283dd8d87f33a6e8c907777640ad6f8b18568fdd8",
+  "pins" : [
+    {
+      "identity" : "corekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/willmoreira/CoreKit.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "58da3fd99613a4320c0ca201ce2ab13115c3e228"
+      }
+    }
+  ],
+  "version" : 3
+}

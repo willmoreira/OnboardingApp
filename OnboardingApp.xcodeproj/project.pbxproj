@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D4B22672E33C8C60098AA0E /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4B22662E33C8C60098AA0E /* CoreKit */; };
+		3DF7780C2E33E5EA009218AE /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3DF7780B2E33E5EA009218AE /* CoreKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +28,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3D4B22642E33C7170098AA0E /* CoreKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreKit; sourceTree = "<group>"; };
 		3DE306492E32D83D00117698 /* OnboardingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnboardingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DE3065F2E32D83E00117698 /* OnboardingAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnboardingAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DE306692E32D83E00117698 /* OnboardingAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnboardingAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D4B22672E33C8C60098AA0E /* CoreKit in Frameworks */,
+				3DF7780C2E33E5EA009218AE /* CoreKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +100,6 @@
 		3DE306402E32D83C00117698 = {
 			isa = PBXGroup;
 			children = (
-				3D4B22642E33C7170098AA0E /* CoreKit */,
 				3DE3064B2E32D83D00117698 /* OnboardingApp */,
 				3DE306622E32D83E00117698 /* OnboardingAppTests */,
 				3DE3066C2E32D83E00117698 /* OnboardingAppUITests */,
@@ -140,7 +138,7 @@
 			);
 			name = OnboardingApp;
 			packageProductDependencies = (
-				3D4B22662E33C8C60098AA0E /* CoreKit */,
+				3DF7780B2E33E5EA009218AE /* CoreKit */,
 			);
 			productName = OnboardingApp;
 			productReference = 3DE306492E32D83D00117698 /* OnboardingApp.app */;
@@ -224,6 +222,9 @@
 			);
 			mainGroup = 3DE306402E32D83C00117698;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3DF7780A2E33E5EA009218AE /* XCRemoteSwiftPackageReference "CoreKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3DE3064A2E32D83D00117698 /* Products */;
 			projectDirPath = "";
@@ -588,9 +589,21 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		3DF7780A2E33E5EA009218AE /* XCRemoteSwiftPackageReference "CoreKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willmoreira/CoreKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		3D4B22662E33C8C60098AA0E /* CoreKit */ = {
+		3DF7780B2E33E5EA009218AE /* CoreKit */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 3DF7780A2E33E5EA009218AE /* XCRemoteSwiftPackageReference "CoreKit" */;
 			productName = CoreKit;
 		};
 /* End XCSwiftPackageProductDependency section */
