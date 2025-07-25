@@ -2,11 +2,15 @@ import UIKit
 
 final class DocumentSelectionViewController: UIViewController {
     
+    // MARK: - Properties
+
     var presenter: DocumentSelectionPresenterProtocol!
 
     private var documents: [Document] = []
     private var selectedDocument: Document?
     private var selectedIndexPath: IndexPath?
+
+    // MARK: - UI Components
 
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -35,6 +39,8 @@ final class DocumentSelectionViewController: UIViewController {
         return button
     }()
 
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Selecione o Documento"
@@ -42,6 +48,15 @@ final class DocumentSelectionViewController: UIViewController {
         setupLayout()
         presenter.viewDidLoad()
     }
+    
+    // MARK: - Actions
+
+    @objc private func nextButtonTapped() {
+        guard let document = selectedDocument else { return }
+        presenter.didTapNext(with: document)
+    }
+
+    // MARK: - Layout
 
     private func setupLayout() {
         title = "Selecione o Documento"
@@ -62,12 +77,24 @@ final class DocumentSelectionViewController: UIViewController {
             nextButton.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
+}
 
-    @objc private func nextButtonTapped() {
-        guard let document = selectedDocument else { return }
-        presenter.didTapNext(with: document)
+// MARK: - DocumentSelectionViewProtocol
+
+extension DocumentSelectionViewController: DocumentSelectionViewProtocol {
+    
+    func showDocuments(_ documents: [Document]) {
+        self.documents = documents
+        tableView.reloadData()
+    }
+    
+    func saveSelectedCountryAndDocument(country: Country, document: Document) {
+        UserDefaults.standard.setEncodable(country, forKey: "selectedCountry")
+        UserDefaults.standard.setEncodable(document, forKey: "selectedDocument")
     }
 }
+
+// MARK: - UITableViewDataSource & UITableViewDelegate
 
 extension DocumentSelectionViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -147,18 +174,5 @@ extension DocumentSelectionViewController: UITableViewDataSource, UITableViewDel
         nextButton.isEnabled = true
         nextButton.alpha = 1.0
         tableView.reloadData()
-    }
-}
-
-extension DocumentSelectionViewController: DocumentSelectionViewProtocol {
-    
-    func showDocuments(_ documents: [Document]) {
-        self.documents = documents
-        tableView.reloadData()
-    }
-    
-    func saveSelectedCountryAndDocument(country: Country, document: Document) {
-        UserDefaults.standard.setEncodable(country, forKey: "selectedCountry")
-        UserDefaults.standard.setEncodable(document, forKey: "selectedDocument")
     }
 }

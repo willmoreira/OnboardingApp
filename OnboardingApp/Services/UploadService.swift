@@ -14,6 +14,7 @@ final class UploadService: UploadServiceProtocol {
             if success {
                 completion(.success(()))
             } else {
+                //Como está forçando o sucesso, esse trecho nunca será executado
                 let error = NSError(domain: "UploadError", code: 500, userInfo: [NSLocalizedDescriptionKey: "Falha ao enviar o documento."])
                 completion(.failure(error))
             }

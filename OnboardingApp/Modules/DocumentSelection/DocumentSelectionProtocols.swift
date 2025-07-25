@@ -17,5 +17,5 @@ protocol DocumentSelectionInteractorOutputProtocol: AnyObject {
 }
 
 protocol DocumentSelectionRouterProtocol: AnyObject {
-    func navigateToNextStep()
+    func navigateToDocumentCapture()
 }

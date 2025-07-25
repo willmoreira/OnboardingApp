@@ -2,7 +2,11 @@ import UIKit
 
 final class DocumentSelectionRouter: DocumentSelectionRouterProtocol {
     
+    // MARK: - Properties
+
     weak var coordinator: AppCoordinator?
+
+    // MARK: - Module Creation
 
     static func createModule(coordinator: AppCoordinator, country: Country) -> UIViewController {
         let view = DocumentSelectionViewController()
@@ -16,8 +20,10 @@ final class DocumentSelectionRouter: DocumentSelectionRouterProtocol {
         
         return view
     }
+    
+    // MARK: - Navigation
 
-    func navigateToNextStep() {
+    func navigateToDocumentCapture() {
         coordinator?.goToDocumentCapture()
     }
 }

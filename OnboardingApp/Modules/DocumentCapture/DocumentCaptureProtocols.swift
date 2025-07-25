@@ -11,8 +11,8 @@ protocol DocumentCaptureViewProtocol: AnyObject {
 
 protocol DocumentCapturePresenterProtocol: AnyObject {
     func viewDidLoad()
-    func didTapCapture()
     func didTapSend()
+    func didTapCapture()
     func didRetrieveSelection(country: Country, document: Document)
 }
 

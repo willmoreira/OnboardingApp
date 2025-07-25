@@ -1,8 +1,14 @@
-import Foundation
-
-final class CountrySelectionInteractor: CountrySelectionInteractorProtocol {
+final class CountrySelectionInteractor {
+    
+    // MARK: - Properties
+    
     weak var presenter: CountrySelectionPresenter?
+}
 
+// MARK: - CountrySelectionInteractorProtocol
+
+extension CountrySelectionInteractor: CountrySelectionInteractorProtocol {
+    
     func fetchCountries() {
         let mockCountries = [
             Country(name: "Brasil", flagImageName: "br"),

@@ -2,8 +2,12 @@ import UIKit
 
 final class DocumentCaptureViewController: UIViewController {
     
+    // MARK: - Properties
+
     var presenter: DocumentCapturePresenterProtocol!
 
+    // MARK: - UI Components
+    
     private lazy var imageView: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
@@ -101,6 +105,8 @@ final class DocumentCaptureViewController: UIViewController {
         return stack
     }()
 
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Captura de Documento"
@@ -110,6 +116,8 @@ final class DocumentCaptureViewController: UIViewController {
         setupLayout()
     }
     
+    // MARK: - Actions
+
     @objc private func clearTapped() {
         imageView.image = nil
         sendButton.isEnabled = false
@@ -117,6 +125,16 @@ final class DocumentCaptureViewController: UIViewController {
         clearButton.isEnabled = false
         clearButton.alpha = 0.3
     }
+    
+    @objc private func captureTapped() {
+        presenter.didTapCapture()
+    }
+
+    @objc private func sendTapped() {
+        presenter.didTapSend()
+    }
+    
+    // MARK: - Layout
 
     private func setupLayout() {
         clearButton.isEnabled = false
@@ -164,18 +182,12 @@ final class DocumentCaptureViewController: UIViewController {
         view.bringSubviewToFront(activityIndicator)
         view.bringSubviewToFront(loadingOverlay)
     }
-
-    @objc private func captureTapped() {
-        presenter.didTapCapture()
-    }
-
-    @objc private func sendTapped() {
-        presenter.didTapSend()
-    }
 }
 
+// MARK: - DocumentCaptureViewProtocol
+
 extension DocumentCaptureViewController: DocumentCaptureViewProtocol {
-    
+
     func showCapturedImage(_ image: UIImage) {
         imageView.image = image
         sendButton.isEnabled = true
@@ -183,7 +195,6 @@ extension DocumentCaptureViewController: DocumentCaptureViewProtocol {
         clearButton.isEnabled = true
         clearButton.alpha = 1.0
     }
-
 
     func showLoading(_ show: Bool) {
         loadingOverlay.isHidden = !show
@@ -195,13 +206,13 @@ extension DocumentCaptureViewController: DocumentCaptureViewProtocol {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
-    
+
     func showErrorMessage() {
         let alert = UIAlertController(title: "Erro", message: "Erro ao carregar a imagem", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
-    
+
     func displaySelectedCountry(_ name: String) {
         countryLabel.text = "País: \(name)"
     }

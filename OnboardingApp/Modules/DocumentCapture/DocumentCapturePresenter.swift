@@ -2,11 +2,17 @@ import UIKit
 
 final class DocumentCapturePresenter {
     
+    // MARK: - VIP Properties
+
     weak var view: DocumentCaptureViewProtocol?
     private let interactor: DocumentCaptureInteractorProtocol
     private let router: DocumentCaptureRouterProtocol
 
+    // MARK: - Properties
+
     private var capturedImage: UIImage?
+
+    // MARK: - Initialization
 
     init(view: DocumentCaptureViewProtocol,
          interactor: DocumentCaptureInteractorProtocol,
@@ -15,23 +21,16 @@ final class DocumentCapturePresenter {
         self.interactor = interactor
         self.router = router
     }
-    
+}
+
+// MARK: - DocumentCapturePresenterProtocol
+
+extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
+
     func viewDidLoad() {
         interactor.fetchSavedSelection()
     }
-}
-
-extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
     
-    func didTapCapture() {
-        if let image = UIImage(named: "doc_sample") {
-            capturedImage = image
-            view?.showCapturedImage(image)
-        } else {
-            view?.showSuccessMessage()
-        }
-    }
-
     func didTapSend() {
         guard let image = capturedImage else {
             view?.showErrorMessage()
@@ -41,7 +40,18 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
         view?.showLoading(true)
         interactor.uploadDocument(image)
     }
+    
+    func didTapCapture() {
+        if let image = UIImage(named: "doc_sample") {
+            capturedImage = image
+            view?.showCapturedImage(image)
+        } else {
+            view?.showSuccessMessage()
+        }
+    }
 }
+
+// MARK: - DocumentCaptureInteractorOutputProtocol
 
 extension DocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
    

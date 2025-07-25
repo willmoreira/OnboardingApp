@@ -1,14 +1,23 @@
 import UIKit
 
-final class DocumentCaptureInteractor: DocumentCaptureInteractorProtocol {
-    weak var presenter: DocumentCaptureInteractorOutputProtocol?
+final class DocumentCaptureInteractor {
     
+    // MARK: - Properties
+
+    weak var presenter: DocumentCaptureInteractorOutputProtocol?
     private let uploadService: UploadServiceProtocol
     
+    // MARK: - Initialization
+
     init(uploadService: UploadServiceProtocol) {
         self.uploadService = uploadService
     }
+}
 
+// MARK: - DocumentCaptureInteractorProtocol
+
+extension DocumentCaptureInteractor: DocumentCaptureInteractorProtocol {
+    
     func uploadDocument(_ image: UIImage) {
         uploadService.upload(image: image) { [weak self] result in
             guard let self = self else { return }
@@ -23,8 +32,12 @@ final class DocumentCaptureInteractor: DocumentCaptureInteractorProtocol {
     }
     
     func fetchSavedSelection() {
-        guard let country = UserDefaults.standard.getDecodable(forKey: "selectedCountry", as: Country.self),
-              let document = UserDefaults.standard.getDecodable(forKey: "selectedDocument", as: Document.self) else {
+        guard let country = UserDefaults.standard.getDecodable(
+            forKey: "selectedCountry",
+            as: Country.self),
+              let document = UserDefaults.standard.getDecodable(
+                forKey: "selectedDocument",
+                as: Document.self) else {
             return
         }
         

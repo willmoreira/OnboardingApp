@@ -1,12 +1,17 @@
 import UIKit
 
 final class CountrySelectionViewController: UIViewController {
+
+    // MARK: - Properties
+
     var presenter: CountrySelectionPresenterProtocol!
-    
+
     private var countries: [Country] = []
     private var selectedCountry: Country?
     private var selectedIndexPath: IndexPath?
-    
+
+    // MARK: - UI Components
+
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.separatorStyle = .none
@@ -16,7 +21,7 @@ final class CountrySelectionViewController: UIViewController {
         table.delegate = self
         return table
     }()
-    
+
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -33,18 +38,24 @@ final class CountrySelectionViewController: UIViewController {
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
-    
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
         presenter.viewDidLoad()
     }
-    
+
+    // MARK: - Actions
+
     @objc private func nextButtonTapped() {
         guard let country = selectedCountry else { return }
         presenter.didTapNext(with: country)
     }
-    
+
+    // MARK: - Layout
+
     private func setupLayout() {
         title = "Selecione o País"
         view.backgroundColor = .systemBackground
@@ -66,12 +77,16 @@ final class CountrySelectionViewController: UIViewController {
     }
 }
 
+// MARK: - CountrySelectionViewProtocol
+
 extension CountrySelectionViewController: CountrySelectionViewProtocol {
     func showCountries(_ countries: [Country]) {
         self.countries = countries
         tableView.reloadData()
     }
 }
+
+// MARK: - UITableViewDataSource & UITableViewDelegate
 
 extension CountrySelectionViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -147,3 +162,4 @@ extension CountrySelectionViewController: UITableViewDataSource, UITableViewDele
         tableView.reloadData()
     }
 }
+

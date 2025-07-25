@@ -1,12 +1,21 @@
-final class DocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
+final class DocumentSelectionInteractor {
     
+    // MARK: - Properties
+
     weak var presenter: DocumentSelectionInteractorOutputProtocol?
     private let country: Country
+
+    // MARK: - Initialization
 
     init(country: Country) {
         self.country = country
     }
+}
 
+// MARK: - DocumentSelectionInteractorProtocol
+
+extension DocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
+    
     func fetchDocuments() {
         let documents: [Document]
 

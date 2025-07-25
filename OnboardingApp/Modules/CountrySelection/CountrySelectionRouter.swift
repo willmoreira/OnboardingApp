@@ -1,8 +1,13 @@
 import UIKit
 
 final class CountrySelectionRouter: CountrySelectionRouterProtocol {
+
+    // MARK: - Properties
+
     weak var viewController: UIViewController?
     var coordinator: AppCoordinator?
+
+    // MARK: - Module Creation
 
     static func createModule(coordinator: AppCoordinator) -> UIViewController {
         let view = CountrySelectionViewController()
@@ -22,7 +27,10 @@ final class CountrySelectionRouter: CountrySelectionRouterProtocol {
         return view
     }
 
-    func navigateToNextStep(with country: Country) {
+    // MARK: - Navigation
+
+    func navigateToDocumentSelection(with country: Country) {
         coordinator?.goToDocumentSelection(with: country)
     }
 }
+
