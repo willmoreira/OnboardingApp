@@ -4,18 +4,20 @@ final class DocumentSelectionInteractor {
 
     weak var presenter: DocumentSelectionInteractorOutputProtocol?
     private let country: Country
+    private let eventLogger: EventLogging
 
     // MARK: - Initialization
 
-    init(country: Country) {
+    init(country: Country, eventLogger: EventLogging) {
         self.country = country
+        self.eventLogger = eventLogger
     }
 }
 
 // MARK: - DocumentSelectionInteractorProtocol
 
 extension DocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
-    
+   
     func fetchDocuments() {
         let documents: [Document]
 
@@ -37,5 +39,9 @@ extension DocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
         }
 
         presenter?.didFetchDocuments(documents, country)
+    }
+    
+    func sendEvent(country: Country, document: Document) {
+        eventLogger.sendEvent("tapped_select_document", parameters: ["document": document.name])
     }
 }

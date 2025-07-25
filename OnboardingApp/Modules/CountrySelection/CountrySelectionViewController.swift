@@ -35,6 +35,10 @@ final class CountrySelectionViewController: UIViewController {
         button.tintColor = .systemGreen
         button.isEnabled = false
         button.alpha = 0.3
+        button.isAccessibilityElement = true
+        button.accessibilityLabel = "Avançar para próxima etapa"
+        button.accessibilityHint = "Selecione um país para ativar este botão"
+        button.accessibilityTraits = .button
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -58,6 +62,7 @@ final class CountrySelectionViewController: UIViewController {
 
     private func setupLayout() {
         title = "Selecione o País"
+        UIAccessibility.post(notification: .screenChanged, argument: self.navigationItem.titleView ?? self)
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         view.addSubview(nextButton)
@@ -101,6 +106,11 @@ extension CountrySelectionViewController: UITableViewDataSource, UITableViewDele
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+        cell.isAccessibilityElement = true
+        cell.accessibilityLabel = isSelected
+            ? "\(country.name), selecionado"
+            : country.name
+        cell.accessibilityTraits = isSelected ? [.button, .selected] : .button
 
         let cardView = UIView()
         cardView.translatesAutoresizingMaskIntoConstraints = false
@@ -159,7 +169,8 @@ extension CountrySelectionViewController: UITableViewDataSource, UITableViewDele
         selectedCountry = countries[indexPath.row]
         nextButton.isEnabled = true
         nextButton.alpha = 1.0
+        nextButton.accessibilityHint = "Avança para a próxima etapa"
         tableView.reloadData()
+        UIAccessibility.post(notification: .layoutChanged, argument: nextButton)
     }
 }
-

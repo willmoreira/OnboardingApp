@@ -26,6 +26,7 @@ extension CountrySelectionPresenter: CountrySelectionPresenterProtocol {
     }
 
     func didTapNext(with country: Country) {
+        interactor.sendEventTap(with: country)
         router.navigateToDocumentSelection(with: country)
     }
 }

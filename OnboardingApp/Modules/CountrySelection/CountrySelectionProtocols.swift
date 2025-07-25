@@ -4,6 +4,7 @@ protocol CountrySelectionViewProtocol: AnyObject {
 
 protocol CountrySelectionInteractorProtocol: AnyObject {
     func fetchCountries()
+    func sendEventTap(with country: Country)
 }
 
 protocol CountrySelectionPresenterProtocol: AnyObject {

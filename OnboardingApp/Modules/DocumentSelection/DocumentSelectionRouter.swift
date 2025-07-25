@@ -10,7 +10,8 @@ final class DocumentSelectionRouter: DocumentSelectionRouterProtocol {
 
     static func createModule(coordinator: AppCoordinator, country: Country) -> UIViewController {
         let view = DocumentSelectionViewController()
-        let interactor = DocumentSelectionInteractor(country: country)
+        let eventLogger = ConsoleEventLogger()
+        let interactor = DocumentSelectionInteractor(country: country, eventLogger: eventLogger)
         let router = DocumentSelectionRouter()
         let presenter = DocumentSelectionPresenter(view: view, interactor: interactor, router: router)
 

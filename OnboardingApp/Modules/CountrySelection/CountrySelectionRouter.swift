@@ -11,7 +11,8 @@ final class CountrySelectionRouter: CountrySelectionRouterProtocol {
 
     static func createModule(coordinator: AppCoordinator) -> UIViewController {
         let view = CountrySelectionViewController()
-        let interactor = CountrySelectionInteractor()
+        let eventLogger = ConsoleEventLogger()
+        let interactor = CountrySelectionInteractor(eventLogger: eventLogger)
         let router = CountrySelectionRouter()
         let presenter = CountrySelectionPresenter(
             view: view,

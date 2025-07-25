@@ -10,6 +10,7 @@ protocol DocumentSelectionPresenterProtocol: AnyObject {
 
 protocol DocumentSelectionInteractorProtocol: AnyObject {
     func fetchDocuments()
+    func sendEvent(country: Country, document: Document)
 }
 
 protocol DocumentSelectionInteractorOutputProtocol: AnyObject {

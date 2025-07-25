@@ -3,6 +3,13 @@ final class CountrySelectionInteractor {
     // MARK: - Properties
     
     weak var presenter: CountrySelectionPresenter?
+    private let eventLogger: EventLogging
+    
+    // MARK: - Initialization
+
+    init(eventLogger: EventLogging) {
+        self.eventLogger = eventLogger
+    }
 }
 
 // MARK: - CountrySelectionInteractorProtocol
@@ -18,5 +25,9 @@ extension CountrySelectionInteractor: CountrySelectionInteractorProtocol {
             Country(name: "Japão", flagImageName: "jp"),
         ]
         presenter?.didFetchCountries(mockCountries)
+    }
+    
+    func sendEventTap(with country: Country) {
+        eventLogger.sendEvent("tapped_select_country", parameters: ["country": country.name])
     }
 }

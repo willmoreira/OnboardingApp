@@ -114,6 +114,7 @@ final class DocumentCaptureViewController: UIViewController {
         presenter.viewDidLoad()
 
         setupLayout()
+        configureAccessibility()
     }
     
     // MARK: - Actions
@@ -132,6 +133,36 @@ final class DocumentCaptureViewController: UIViewController {
 
     @objc private func sendTapped() {
         presenter.didTapSend()
+    }
+    
+    private func configureAccessibility() {
+        countryLabel.isAccessibilityElement = true
+        countryLabel.accessibilityLabel = "País selecionado"
+        countryLabel.accessibilityValue = countryLabel.text
+
+        documentLabel.isAccessibilityElement = true
+        documentLabel.accessibilityLabel = "Documento selecionado"
+        documentLabel.accessibilityValue = documentLabel.text
+
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityLabel = "Imagem do documento capturado"
+        imageView.accessibilityTraits = .image
+
+        captureButton.isAccessibilityElement = true
+        captureButton.accessibilityLabel = "Capturar documento"
+        captureButton.accessibilityHint = "Abre a câmera para capturar uma imagem do documento"
+
+        sendButton.isAccessibilityElement = true
+        sendButton.accessibilityLabel = "Enviar documento"
+        sendButton.accessibilityHint = "Envia a imagem capturada do documento"
+        
+        clearButton.isAccessibilityElement = true
+        clearButton.accessibilityLabel = "Limpar captura"
+        clearButton.accessibilityHint = "Remove a imagem capturada"
+
+        activityIndicator.isAccessibilityElement = true
+        activityIndicator.accessibilityLabel = "Carregando"
+        activityIndicator.accessibilityTraits = .updatesFrequently
     }
     
     // MARK: - Layout
@@ -205,19 +236,28 @@ extension DocumentCaptureViewController: DocumentCaptureViewProtocol {
         let alert = UIAlertController(title: "Sucesso", message: "Documento enviado com sucesso!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+        
+        UIAccessibility.post(notification: .announcement, argument: "Documento enviado com sucesso")
     }
+
 
     func showErrorMessage() {
         let alert = UIAlertController(title: "Erro", message: "Erro ao carregar a imagem", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+        
+        UIAccessibility.post(notification: .announcement, argument: "Erro ao carregar a imagem")
     }
 
     func displaySelectedCountry(_ name: String) {
-        countryLabel.text = "País: \(name)"
+        let text = "País: \(name)"
+        countryLabel.text = text
+        countryLabel.accessibilityValue = text
     }
 
     func displaySelectedDocument(_ name: String) {
-        documentLabel.text = "Documento: \(name)"
+        let text = "Documento: \(name)"
+        documentLabel.text = text
+        documentLabel.accessibilityValue = text
     }
 }

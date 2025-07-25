@@ -36,6 +36,11 @@ final class DocumentSelectionViewController: UIViewController {
         button.isEnabled = false
         button.alpha = 0.3
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+
+        button.isAccessibilityElement = true
+        button.accessibilityLabel = "Botão Avançar"
+        button.accessibilityHint = "Avança para o próximo passo após selecionar um documento"
+
         return button
     }()
 
@@ -47,6 +52,8 @@ final class DocumentSelectionViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupLayout()
         presenter.viewDidLoad()
+
+        UIAccessibility.post(notification: .screenChanged, argument: title)
     }
     
     // MARK: - Actions
@@ -59,8 +66,6 @@ final class DocumentSelectionViewController: UIViewController {
     // MARK: - Layout
 
     private func setupLayout() {
-        title = "Selecione o Documento"
-        view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         view.addSubview(nextButton)
         tableView.backgroundColor = .white
@@ -126,7 +131,7 @@ extension DocumentSelectionViewController: UITableViewDataSource, UITableViewDel
         imageView.tintColor = .systemGreen
         imageView.widthAnchor.constraint(equalToConstant: 32).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        
+
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = doc.name
@@ -161,6 +166,18 @@ extension DocumentSelectionViewController: UITableViewDataSource, UITableViewDel
             stack.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16)
         ])
 
+        cell.isAccessibilityElement = true
+        cell.accessibilityLabel = isSelected
+            ? "\(doc.name). Selecionado"
+            : doc.name
+        cell.accessibilityHint = "Toque duas vezes para selecionar este documento."
+
+        imageView.isAccessibilityElement = false
+        label.isAccessibilityElement = false
+        checkImageView.isAccessibilityElement = false
+        stack.isAccessibilityElement = false
+        cardView.isAccessibilityElement = false
+
         return cell
     }
 
@@ -174,5 +191,8 @@ extension DocumentSelectionViewController: UITableViewDataSource, UITableViewDel
         nextButton.isEnabled = true
         nextButton.alpha = 1.0
         tableView.reloadData()
+
+        let selectedDocName = selectedDocument?.name ?? "Documento"
+        UIAccessibility.post(notification: .announcement, argument: "\(selectedDocName) selecionado")
     }
 }

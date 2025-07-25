@@ -62,11 +62,13 @@ extension DocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
     
     func didUploadDocumentSuccessfully() {
         view?.showLoading(false)
+        interactor.sendEventUploadDocumentSuccessfully()
         view?.showSuccessMessage()
     }
 
     func didFailToUploadDocument() {
         view?.showLoading(false)
+        interactor.sendEventFailToUploadDocument()
         view?.showErrorMessage()
     }
 }

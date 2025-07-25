@@ -11,7 +11,8 @@ final class DocumentCaptureRouter: DocumentCaptureRouterProtocol {
     static func createModule(coordinator: AppCoordinator) -> UIViewController {
         let view = DocumentCaptureViewController()
         let uploadService = UploadService()
-        let interactor = DocumentCaptureInteractor(uploadService: uploadService)
+        let eventLogger = ConsoleEventLogger()
+        let interactor = DocumentCaptureInteractor(uploadService: uploadService, eventLogger: eventLogger)
         let router = DocumentCaptureRouter()
         let presenter = DocumentCapturePresenter(view: view, interactor: interactor, router: router)
 

@@ -29,6 +29,7 @@ extension DocumentSelectionPresenter: DocumentSelectionPresenterProtocol {
     func didTapNext(with document: Document) {
         guard let country = selectedCountry else { return }
         view?.saveSelectedCountryAndDocument(country: country, document: document)
+        interactor.sendEvent(country: country, document: document)
         router.navigateToDocumentCapture()
     }
 }
