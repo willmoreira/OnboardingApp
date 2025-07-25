@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "B85FB09C-F4FE-4FE8-BD91-0E9126E18027",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:OnboardingApp.xcodeproj",
+        "identifier" : "3DE3065E2E32D83E00117698",
+        "name" : "OnboardingAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}

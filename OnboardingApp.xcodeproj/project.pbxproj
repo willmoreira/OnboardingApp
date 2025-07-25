@@ -28,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D583A4D2E340E4B000BB827 /* OnboardingAppTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OnboardingAppTests.xctestplan; sourceTree = "<group>"; };
 		3DE306492E32D83D00117698 /* OnboardingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnboardingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DE3065F2E32D83E00117698 /* OnboardingAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnboardingAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DE306692E32D83E00117698 /* OnboardingAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnboardingAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +101,7 @@
 		3DE306402E32D83C00117698 = {
 			isa = PBXGroup;
 			children = (
+				3D583A4D2E340E4B000BB827 /* OnboardingAppTests.xctestplan */,
 				3DE3064B2E32D83D00117698 /* OnboardingApp */,
 				3DE306622E32D83E00117698 /* OnboardingAppTests */,
 				3DE3066C2E32D83E00117698 /* OnboardingAppUITests */,

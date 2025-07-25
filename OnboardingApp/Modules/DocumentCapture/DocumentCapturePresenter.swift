@@ -12,7 +12,8 @@ final class DocumentCapturePresenter {
     // MARK: - Properties
 
     private var capturedImage: UIImage?
-
+    private var document: Document?
+    
     // MARK: - Initialization
 
     init(view: DocumentCaptureViewProtocol,
@@ -43,7 +44,10 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
     }
     
     func didTapCapture() {
-        if let image = UIImage(named: "doc_sample") {
+        let type = DocumentType(from: document)
+        let imageName = type.imageName
+
+        if let image = UIImage(named: imageName) {
             capturedImage = image
             view?.showCapturedImage(image)
         } else {
@@ -57,6 +61,7 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
 extension DocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
    
     func didRetrieveSelection(country: Country, document: Document) {
+        self.document = document
         view?.displaySelectedCountry(country.name)
         view?.displaySelectedDocument(document.name)
     }

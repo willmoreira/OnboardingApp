@@ -4,7 +4,7 @@ final class CountrySelectionInteractor {
     
     // MARK: - Properties
     
-    weak var presenter: CountrySelectionPresenter?
+    weak var presenter: CountrySelectionInteractorOutputProtocol?
     private let eventLogger: EventLogging
     
     // MARK: - Initialization
