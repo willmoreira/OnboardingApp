@@ -1,6 +1,7 @@
 import Foundation
 
 final class CountrySelectionPresenterUITestMock: CountrySelectionPresenterProtocol {
+
     weak var view: CountrySelectionViewProtocol?
 
     func viewDidLoad() {

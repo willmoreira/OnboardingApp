@@ -93,6 +93,10 @@ extension DocumentSelectionViewController: DocumentSelectionViewProtocol {
     func showDocuments(_ documents: [DocumentSelectionUserEntity]) {
         self.documents = documents
         tableView.reloadData()
+
+        DispatchQueue.main.async {
+            self.tableView.isScrollEnabled = self.tableView.contentSize.height > self.tableView.bounds.height
+        }
     }
 }
 

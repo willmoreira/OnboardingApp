@@ -6,6 +6,7 @@ final class CountrySelectionInteractorMock: CountrySelectionInteractorProtocol {
 
     private(set) var fetchCountriesCalled = false
     private(set) var didSelectCountryCalled = false
+    private(set) var sendEventTapCalled = false
     private(set) var selectedCountry: CountrySelectionEntity?
 
     func fetchCountries() {
@@ -24,5 +25,8 @@ final class CountrySelectionInteractorMock: CountrySelectionInteractorProtocol {
         selectedCountry = country
     }
 
-    func sendEventTap(with country: CountrySelectionEntity) {}
+    func sendEventTap(with country: CountrySelectionEntity) {
+        sendEventTapCalled = true
+        selectedCountry = country
+    }
 }

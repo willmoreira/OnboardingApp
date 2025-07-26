@@ -90,6 +90,10 @@ extension CountrySelectionViewController: CountrySelectionViewProtocol {
     func showCountries(_ countries: [CountrySelectionEntity]) {
         self.countries = countries
         tableView.reloadData()
+
+        DispatchQueue.main.async {
+            self.tableView.isScrollEnabled = self.tableView.contentSize.height > self.tableView.bounds.height
+        }
     }
 }
 

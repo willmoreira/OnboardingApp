@@ -2,6 +2,7 @@ import Foundation
 @testable import OnboardingApp
 
 final class CountrySelectionInteractorMock: CountrySelectionInteractorProtocol {
+
     private(set) var fetchCountriesCalled = false
     private(set) var sendEventCalled = false
     private(set) var sentCountry: CountrySelectionEntity?

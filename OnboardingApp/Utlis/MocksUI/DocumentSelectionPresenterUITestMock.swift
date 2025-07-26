@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 public final class DocumentSelectionPresenterUITestMock: DocumentSelectionPresenterProtocol {
+
     weak var view: DocumentSelectionViewProtocol?
 
     func viewDidLoad() {
