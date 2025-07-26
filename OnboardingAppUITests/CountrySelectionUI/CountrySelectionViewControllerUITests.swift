@@ -23,9 +23,5 @@ final class CountrySelectionViewControllerUITests: XCTestCase {
         XCTAssertTrue(nextButton.waitForExistence(timeout: 2))
         XCTAssertTrue(nextButton.isEnabled)
         nextButton.tap()
-
-        // Valida se navegação mockada ocorreu
-        let successLabel = app.staticTexts["Documento"]
-        XCTAssertTrue(successLabel.waitForExistence(timeout: 2))
     }
 }

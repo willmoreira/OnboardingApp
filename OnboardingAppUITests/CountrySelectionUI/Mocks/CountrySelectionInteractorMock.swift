@@ -1,17 +1,28 @@
 import Foundation
 
 final class CountrySelectionInteractorMock: CountrySelectionInteractorProtocol {
-    weak var output: CountrySelectionInteractorOutputProtocol?
+
+    var output: CountrySelectionInteractorOutputProtocol?
+
+    private(set) var fetchCountriesCalled = false
+    private(set) var didSelectCountryCalled = false
+    private(set) var selectedCountry: CountrySelectionEntity?
 
     func fetchCountries() {
-        let countries = [
-            CountrySelectionEntity(name: "Brasil", flagImageName: "br"),
-            CountrySelectionEntity(name: "Estados Unidos", flagImageName: "us")
+        fetchCountriesCalled = true
+
+        let mockCountries = [
+            CountrySelectionEntity(name: "Brasil", flagImageName: "BR"),
+            CountrySelectionEntity(name: "Estados Unidos", flagImageName: "US")
         ]
-        output?.didFetchCountries(countries)
+
+        output?.didFetchCountries(mockCountries)
     }
 
-    func sendEventTap(with country: CountrySelectionEntity) {
-        // pode simular algo ou deixar vazio
+    func didSelectCountry(_ country: CountrySelectionEntity) {
+        didSelectCountryCalled = true
+        selectedCountry = country
     }
+
+    func sendEventTap(with country: CountrySelectionEntity) {}
 }

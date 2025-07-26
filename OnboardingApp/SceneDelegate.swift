@@ -23,6 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if CommandLine.arguments.contains("-UITestMode") {
             window.rootViewController = buildCountrySelectionUITest()
+        } else if CommandLine.arguments.contains("-UITestDocumentSelection") {
+            window.rootViewController = buildDocumentSelectionUITest()
+        } else if CommandLine.arguments.contains("-UITestDocumentCapture") {
+            window.rootViewController = buildDocumentCaptureUITest()
         } else {
             let navController = UINavigationController()
             appCoordinator = AppCoordinator(navigationController: navController)
@@ -49,4 +53,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         return UINavigationController(rootViewController: viewController)
     }
+
+    func buildDocumentSelectionUITest() -> UIViewController {
+        let view = DocumentSelectionViewController()
+        let presenter = DocumentSelectionPresenterUITestMock()
+        presenter.view = view
+        view.presenter = presenter
+        return UINavigationController(rootViewController: view)
+    }
+
+    func buildDocumentCaptureUITest() -> UIViewController {
+        let viewController = DocumentCaptureViewController()
+
+        let presenter = DocumentCapturePresenterUITestMock()
+        presenter.view = viewController
+        viewController.presenter = presenter
+
+        return viewController
+    }
+
 }

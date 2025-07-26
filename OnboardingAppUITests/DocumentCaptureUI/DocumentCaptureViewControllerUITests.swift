@@ -1,31 +1,22 @@
 import XCTest
 
 final class DocumentCaptureViewControllerUITests: XCTestCase {
-    private var app: XCUIApplication!
 
     override func setUp() {
-        super.setUp()
         continueAfterFailure = false
-        app = XCUIApplication()
-        app.launchArguments = ["-UITestMode"]
+        let app = XCUIApplication()
+        app.launchArguments.append("-UITestDocumentCapture")
         app.launch()
     }
 
-    func testSelectCountryAndTapNext() {
-        let table = app.tables.element
-        XCTAssertTrue(table.waitForExistence(timeout: 5))
+    func testCaptureImageFlow() {
+        let app = XCUIApplication()
 
-        let firstCell = table.cells.element(boundBy: 0)
-        XCTAssertTrue(firstCell.exists)
-        firstCell.tap()
+        let captureButton = app.buttons["captureButton"]
+        XCTAssertTrue(captureButton.waitForExistence(timeout: 5))  // Aguarda botão aparecer
+        captureButton.tap()
 
-        let nextButton = app.buttons["Avançar"]
-        XCTAssertTrue(nextButton.waitForExistence(timeout: 2))
-        XCTAssertTrue(nextButton.isEnabled)
-        nextButton.tap()
-
-        // Valida se navegação mockada ocorreu
-        let successLabel = app.staticTexts["Documento"]
-        XCTAssertTrue(successLabel.waitForExistence(timeout: 2))
+        let image = app.images["capturedImage"]
+        XCTAssertTrue(image.waitForExistence(timeout: 5))  // Aguarda imagem aparecer
     }
 }

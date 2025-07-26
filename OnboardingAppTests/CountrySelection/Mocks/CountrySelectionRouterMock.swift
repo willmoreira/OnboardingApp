@@ -2,6 +2,7 @@ import Foundation
 @testable import OnboardingApp
 
 final class CountrySelectionRouterMock: CountrySelectionRouterProtocol {
+
     private(set) var navigatedToDocumentSelection = false
     private(set) var selectedCountry: CountrySelectionEntity?
 

@@ -14,6 +14,7 @@ final class DocumentCaptureViewController: UIViewController {
         img.contentMode = .scaleAspectFit
         img.layer.borderColor = UIColor.lightGray.cgColor
         img.layer.borderWidth = 1
+        img.accessibilityIdentifier = "capturedImage"
         img.clipsToBounds = true
         return img
     }()
@@ -29,6 +30,7 @@ final class DocumentCaptureViewController: UIViewController {
         button.tintColor = .systemGreen
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Capturar Documento", for: .normal)
+        button.accessibilityIdentifier = "captureButton"
         button.addTarget(self, action: #selector(captureTapped), for: .touchUpInside)
         return button
     }()
