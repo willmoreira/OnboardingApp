@@ -88,9 +88,9 @@ Rodar testes:
 
 ## 📸 Screenshots
 
-<img width="292" height="633" alt="IMG_6581" src="https://github.com/user-attachments/assets/b82198b2-7008-484e-a0ee-5b8fade12af5" />
-<img width="292" height="633" alt="IMG_6582" src="https://github.com/user-attachments/assets/fb3b90f2-c851-44b0-a3fe-e5d4ce254b9b" />
-<img width="292" height="633" alt="IMG_6583" src="https://github.com/user-attachments/assets/a079de86-c6a9-40b0-8017-d84694ab00af" />
+<img width="263" height="570" alt="IMG_6581" src="https://github.com/user-attachments/assets/b82198b2-7008-484e-a0ee-5b8fade12af5" />
+<img width="263" height="570" alt="IMG_6582" src="https://github.com/user-attachments/assets/fb3b90f2-c851-44b0-a3fe-e5d4ce254b9b" />
+<img width="263" height="570" alt="IMG_6583" src="https://github.com/user-attachments/assets/a079de86-c6a9-40b0-8017-d84694ab00af" />
 
 ## 📈 Analytics
 
