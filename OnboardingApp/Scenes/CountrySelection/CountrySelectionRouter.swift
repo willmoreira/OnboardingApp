@@ -31,7 +31,7 @@ final class CountrySelectionRouter {
 
 extension CountrySelectionRouter: CountrySelectionRouterProtocol {
 
-    func navigateToDocumentSelection(with country: CountrySelectionEntity) {
+    func navigateToDocumentSelection(with country: CountrySelectionEntity.UserEntity) {
         coordinator?.goToDocumentSelection(with: country)
     }
 }

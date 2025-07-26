@@ -5,28 +5,23 @@ final class CountrySelectionInteractorMock: CountrySelectionInteractorProtocol {
     var output: CountrySelectionInteractorOutputProtocol?
 
     private(set) var fetchCountriesCalled = false
-    private(set) var didSelectCountryCalled = false
     private(set) var sendEventTapCalled = false
-    private(set) var selectedCountry: CountrySelectionEntity?
+    private(set) var selectedCountry: CountrySelectionEntity.UserEntity?
 
-    func fetchCountries() {
+    func fetchCountries(request: CountrySelectionEntity.Request) {
         fetchCountriesCalled = true
 
         let mockCountries = [
-            CountrySelectionEntity(name: "Brasil", flagImageName: "BR"),
-            CountrySelectionEntity(name: "Estados Unidos", flagImageName: "US")
+            CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "BR"),
+            CountrySelectionEntity.UserEntity(name: "Estados Unidos", flagImageName: "US")
         ]
 
-        output?.didFetchCountries(mockCountries)
+        let response = CountrySelectionEntity.Response(countries: mockCountries)
+        output?.didFetchCountries(response)
     }
 
-    func didSelectCountry(_ country: CountrySelectionEntity) {
-        didSelectCountryCalled = true
-        selectedCountry = country
-    }
-
-    func sendEventTap(with country: CountrySelectionEntity) {
+    func sendEventTap(with request: CountrySelectionEntity.Request) {
         sendEventTapCalled = true
-        selectedCountry = country
+        selectedCountry = request.entity
     }
 }

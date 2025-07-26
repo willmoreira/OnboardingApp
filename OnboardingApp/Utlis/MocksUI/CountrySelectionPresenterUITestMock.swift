@@ -6,14 +6,19 @@ final class CountrySelectionPresenterUITestMock: CountrySelectionPresenterProtoc
 
     func viewDidLoad() {
         let mockCountries = [
-            CountrySelectionEntity(name: "Brasil", flagImageName: "br"),
-            CountrySelectionEntity(name: "Estados Unidos", flagImageName: "us")
+            CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "br"),
+            CountrySelectionEntity.UserEntity(name: "Estados Unidos", flagImageName: "us")
         ]
-        view?.showCountries(mockCountries)
+        
+        // Monta o ViewModel com os UserEntity mockados
+        let viewModel = CountrySelectionEntity.ViewModel(countries: mockCountries)
+        
+        // Passa para a view o ViewModel correto
+        view?.showCountries(viewModel)
     }
 
-    func didTapNext(with country: CountrySelectionEntity) {
+    func didTapNext(with request: CountrySelectionEntity.Request) {
         UserDefaults.standard.set(true, forKey: "didNavigate")
-        UserDefaults.standard.set(country.name, forKey: "selectedCountry")
+        UserDefaults.standard.set(request.entity.name, forKey: "selectedCountry")
     }
 }

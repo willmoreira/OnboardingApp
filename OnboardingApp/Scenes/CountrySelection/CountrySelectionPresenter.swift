@@ -22,12 +22,14 @@ final class CountrySelectionPresenter {
 extension CountrySelectionPresenter: CountrySelectionPresenterProtocol {
 
     func viewDidLoad() {
-        interactor.fetchCountries()
+        // Cria um request vazio (sem filtro, por exemplo)
+        let request = CountrySelectionEntity.Request(entity: CountrySelectionEntity.UserEntity(name: "", flagImageName: ""))
+        interactor.fetchCountries(request: request)
     }
 
-    func didTapNext(with country: CountrySelectionEntity) {
-        interactor.sendEventTap(with: country)
-        router.navigateToDocumentSelection(with: country)
+    func didTapNext(with request: CountrySelectionEntity.Request) {
+        interactor.sendEventTap(with: request)
+        router.navigateToDocumentSelection(with: request.entity)
     }
 }
 
@@ -35,7 +37,8 @@ extension CountrySelectionPresenter: CountrySelectionPresenterProtocol {
 
 extension CountrySelectionPresenter: CountrySelectionInteractorOutputProtocol {
 
-    func didFetchCountries(_ countries: [CountrySelectionEntity]) {
-        view?.showCountries(countries)
+    func didFetchCountries(_ response: CountrySelectionEntity.Response) {
+        let viewModel = CountrySelectionEntity.ViewModel(countries: response.countries)
+        view?.showCountries(viewModel)
     }
 }

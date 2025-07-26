@@ -5,7 +5,7 @@ final class DocumentSelectionPresenter {
     weak var view: DocumentSelectionViewProtocol?
     private let interactor: DocumentSelectionInteractorProtocol
     private let router: DocumentSelectionRouterProtocol
-    private var selectedCountry: CountrySelectionEntity?
+    private var selectedCountry: CountrySelectionEntity.UserEntity?
 
     // MARK: - Initialization
 
@@ -26,10 +26,10 @@ extension DocumentSelectionPresenter: DocumentSelectionPresenterProtocol {
         interactor.fetchDocuments()
     }
 
-    func didTapNext(with document: DocumentSelectionUserEntity) {
-        guard let country = selectedCountry else { return }
-        interactor.saveSelectedCountryAndDocument(country: country, document: document)
-        interactor.sendEvent(country: country, document: document)
+    func didTapNext(with document: DocumentSelectionEntity.UserEntity) {
+        let request = DocumentSelectionEntity.Request(entity: document)
+        interactor.saveSelectedCountryAndDocument(request: request)
+        interactor.sendEvent(request: request)
         router.navigateToDocumentCapture()
     }
 }
@@ -38,8 +38,14 @@ extension DocumentSelectionPresenter: DocumentSelectionPresenterProtocol {
 
 extension DocumentSelectionPresenter: DocumentSelectionInteractorOutputProtocol {
 
-    func didFetchDocuments(_ documents: [DocumentSelectionUserEntity], _ country: CountrySelectionEntity) {
-        self.selectedCountry = country
-        view?.showDocuments(documents)
+    func didFetchDocuments(_ response: DocumentSelectionEntity.Response) {
+        self.selectedCountry = countryFromResponse(response)
+        let viewModel = DocumentSelectionEntity.ViewModel(documents: response.documents)
+        view?.showDocuments(viewModel)
+    }
+
+    private func countryFromResponse(_ response: DocumentSelectionEntity.Response) -> CountrySelectionEntity.UserEntity? {
+        return selectedCountry
     }
 }
+

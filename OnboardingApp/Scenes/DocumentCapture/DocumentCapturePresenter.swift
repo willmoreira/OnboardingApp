@@ -11,7 +11,7 @@ final class DocumentCapturePresenter {
     // MARK: - Properties
 
     private var capturedImage: UIImage?
-    private var document: DocumentSelectionUserEntity?
+    private var document: DocumentSelectionEntity.UserEntity?
 
     // MARK: - Initialization
 
@@ -43,6 +43,11 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
     }
 
     func didTapCapture() {
+        guard let document = document else {
+            view?.showErrorMessage()
+            return
+        }
+
         let type = DocumentType(from: document)
         let imageName = type.imageName
 
@@ -59,9 +64,22 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
 
 extension DocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
 
-    func didRetrieveSelection(_ selection: UserSelectionEntity) {
+    func didRetrieveSelection(_ response: UserSelectionEntity.Response) {
+        let selection = response.selection
         self.document = selection.document
-        view?.displayUserSelection(selection)
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        let birthDateFormatted = formatter.string(from: selection.birthDate)
+
+        let viewModel = UserSelectionEntity.ViewModel(
+            countryName: selection.country.name,
+            documentName: selection.document.name,
+            birthDateFormatted: birthDateFormatted
+        )
+
+        view?.displayUserSelection(viewModel)
     }
 
     func didUploadDocumentSuccessfully() {

@@ -10,7 +10,7 @@ final class DocumentSelectionRouter {
 
     static func createModule(
         coordinator: AppCoordinator,
-        country: CountrySelectionEntity
+        country: CountrySelectionEntity.UserEntity
     ) -> UIViewController {
         let view = DocumentSelectionViewController()
         let eventLogger = ConsoleEventLogger()
