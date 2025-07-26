@@ -59,10 +59,9 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
 
 extension DocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
 
-    func didRetrieveSelection(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
-        self.document = document
-        view?.displaySelectedCountry(country.name)
-        view?.displaySelectedDocument(document.name)
+    func didRetrieveSelection(_ selection: UserSelectionEntity) {
+        self.document = selection.document
+        view?.displayUserSelection(selection)
     }
 
     func didUploadDocumentSuccessfully() {

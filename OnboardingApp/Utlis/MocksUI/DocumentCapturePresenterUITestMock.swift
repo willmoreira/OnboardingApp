@@ -8,12 +8,17 @@ final class DocumentCapturePresenterUITestMock: DocumentCapturePresenterProtocol
     func viewDidLoad() {
         let dummyCountry = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
         let dummyDocument = DocumentSelectionUserEntity(name: "CNH", iconName: "car.fill")
+        let dummyBirthDate = Calendar.current.date(byAdding: .year, value: -25, to: Date()) ?? Date()
 
-        view?.displaySelectedCountry(dummyCountry.name)
-        view?.displaySelectedDocument(dummyDocument.name)
+        let selection = UserSelectionEntity(
+            country: dummyCountry,
+            document: dummyDocument,
+            birthDate: dummyBirthDate
+        )
+        view?.displayUserSelection(selection)
     }
 
     func didTapCapture() {}
     func didTapSend() {}
-    func didRetrieveSelection(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {}
+    func didRetrieveSelection(_ selection: UserSelectionEntity) {}
 }

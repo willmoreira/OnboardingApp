@@ -23,6 +23,12 @@ final class AppCoordinator: Coordinator {
         navigationController.pushViewController(module, animated: true)
     }
 
+    func goToBirthDate() {
+        setCustomBackButton()
+        let module = BirthDateRouter.createModule(coordinator: self)
+        navigationController.pushViewController(module, animated: true)
+    }
+
     func goToDocumentCapture() {
         setCustomBackButton()
         let module = DocumentCaptureRouter.createModule(coordinator: self)

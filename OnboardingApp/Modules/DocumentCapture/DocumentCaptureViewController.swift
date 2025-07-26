@@ -90,6 +90,14 @@ final class DocumentCaptureViewController: UIViewController {
         return label
     }()
 
+    private lazy var birthDateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textColor = .label
+        return label
+    }()
+
     private lazy var loadingOverlay: UIView = {
         let overlay = UIView()
         overlay.translatesAutoresizingMaskIntoConstraints = false
@@ -175,6 +183,7 @@ final class DocumentCaptureViewController: UIViewController {
 
         view.addSubview(countryLabel)
         view.addSubview(documentLabel)
+        view.addSubview(birthDateLabel)
         view.addSubview(imageView)
         view.addSubview(captureButton)
         view.addSubview(buttonStackView)
@@ -188,7 +197,10 @@ final class DocumentCaptureViewController: UIViewController {
             documentLabel.topAnchor.constraint(equalTo: countryLabel.bottomAnchor, constant: 8),
             documentLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            imageView.topAnchor.constraint(equalTo: documentLabel.bottomAnchor, constant: 24),
+            birthDateLabel.topAnchor.constraint(equalTo: documentLabel.bottomAnchor, constant: 8),
+            birthDateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            imageView.topAnchor.constraint(equalTo: birthDateLabel.bottomAnchor, constant: 24),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             imageView.heightAnchor.constraint(equalToConstant: 200),
@@ -201,7 +213,7 @@ final class DocumentCaptureViewController: UIViewController {
             captureButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             captureButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
             captureButton.heightAnchor.constraint(equalToConstant: 32),
-            captureButton.widthAnchor.constraint(equalToConstant: 196),
+            captureButton.widthAnchor.constraint(equalToConstant: 200),
 
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -255,15 +267,24 @@ extension DocumentCaptureViewController: DocumentCaptureViewProtocol {
         UIAccessibility.post(notification: .announcement, argument: "Erro ao carregar a imagem")
     }
 
-    func displaySelectedCountry(_ name: String) {
-        let text = "País: \(name)"
-        countryLabel.text = text
-        countryLabel.accessibilityValue = text
-    }
+    func displayUserSelection(_ selection: UserSelectionEntity) {
+        let countryText = "País: \(selection.country.name)"
+        let documentText = "Documento: \(selection.document.name)"
 
-    func displaySelectedDocument(_ name: String) {
-        let text = "Documento: \(name)"
-        documentLabel.text = text
-        documentLabel.accessibilityValue = text
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "pt_BR")
+
+        let birthDateFormatted = formatter.string(from: selection.birthDate)
+        let birthDateText = "Data de nascimento: \(birthDateFormatted)"
+
+        countryLabel.text = countryText
+        documentLabel.text = documentText
+        birthDateLabel.text = birthDateText
+
+        countryLabel.accessibilityValue = countryText
+        documentLabel.accessibilityValue = documentText
+        birthDateLabel.accessibilityValue = birthDateText
     }
 }

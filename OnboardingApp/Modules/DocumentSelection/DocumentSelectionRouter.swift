@@ -1,6 +1,6 @@
 import UIKit
 
-final class DocumentSelectionRouter: DocumentSelectionRouterProtocol {
+final class DocumentSelectionRouter {
 
     // MARK: - Properties
 
@@ -24,10 +24,13 @@ final class DocumentSelectionRouter: DocumentSelectionRouterProtocol {
 
         return view
     }
+}
 
-    // MARK: - Navigation
+// MARK: - DocumentSelectionRouterProtocol
+
+extension DocumentSelectionRouter: DocumentSelectionRouterProtocol {
 
     func navigateToDocumentCapture() {
-        coordinator?.goToDocumentCapture()
+        coordinator?.goToBirthDate()
     }
 }

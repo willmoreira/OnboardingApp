@@ -1,6 +1,6 @@
 import UIKit
 
-final class CountrySelectionRouter {
+final class BirthDateRouter {
 
     // MARK: - Properties
 
@@ -10,11 +10,11 @@ final class CountrySelectionRouter {
     // MARK: - Module Creation
 
     static func createModule(coordinator: AppCoordinator) -> UIViewController {
-        let view = CountrySelectionViewController()
+        let view = BirthDateViewController()
         let eventLogger = ConsoleEventLogger()
-        let interactor = CountrySelectionInteractor(eventLogger: eventLogger)
-        let router = CountrySelectionRouter()
-        let presenter = CountrySelectionPresenter(
+        let interactor = BirthDateInteractor(eventLogger: eventLogger)
+        let router = BirthDateRouter()
+        let presenter = BirthDatePresenter(
             view: view,
             interactor: interactor,
             router: router
@@ -29,9 +29,11 @@ final class CountrySelectionRouter {
     }
 }
 
-extension CountrySelectionRouter: CountrySelectionRouterProtocol {
+// MARK: - BirthDateRouterProtocol
 
-    func navigateToDocumentSelection(with country: CountrySelectionEntity) {
-        coordinator?.goToDocumentSelection(with: country)
+extension BirthDateRouter: BirthDateRouterProtocol {
+
+    func routeToDocumentCapture() {
+        coordinator?.goToDocumentCapture()
     }
 }

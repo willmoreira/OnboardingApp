@@ -78,7 +78,7 @@ final class CountrySelectionViewController: UIViewController {
 
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
-            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.heightAnchor.constraint(equalToConstant: 48),
             nextButton.widthAnchor.constraint(equalToConstant: 200)
         ])
     }

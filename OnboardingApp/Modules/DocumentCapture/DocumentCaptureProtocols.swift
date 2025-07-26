@@ -5,15 +5,13 @@ protocol DocumentCaptureViewProtocol: AnyObject {
     func showLoading(_ show: Bool)
     func showSuccessMessage()
     func showErrorMessage()
-    func displaySelectedCountry(_ name: String)
-    func displaySelectedDocument(_ name: String)
+    func displayUserSelection(_ selection: UserSelectionEntity)
 }
 
 protocol DocumentCapturePresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapSend()
     func didTapCapture()
-    func didRetrieveSelection(country: CountrySelectionEntity, document: DocumentSelectionUserEntity)
 }
 
 protocol DocumentCaptureInteractorProtocol: AnyObject {
@@ -24,7 +22,7 @@ protocol DocumentCaptureInteractorProtocol: AnyObject {
 }
 
 protocol DocumentCaptureInteractorOutputProtocol: AnyObject {
-    func didRetrieveSelection(country: CountrySelectionEntity, document: DocumentSelectionUserEntity)
+    func didRetrieveSelection(_ selection: UserSelectionEntity)
     func didUploadDocumentSuccessfully()
     func didFailToUploadDocument()
 }

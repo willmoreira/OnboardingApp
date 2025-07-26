@@ -37,17 +37,19 @@ extension DocumentCaptureInteractor: DocumentCaptureInteractorProtocol {
     }
 
     func fetchSavedSelection() {
-        guard let country = UserDefaults.standard.getDecodable(
-            forKey: "selectedCountry",
-            as: CountrySelectionEntity.self),
-              let document = UserDefaults.standard.getDecodable(
-                forKey: "selectedDocument",
-                as: DocumentSelectionUserEntity.self
-              ) else {
+        guard let country = UserDefaults.standard.getDecodable(forKey: "selectedCountry", as: CountrySelectionEntity.self),
+              let document = UserDefaults.standard.getDecodable(forKey: "selectedDocument", as: DocumentSelectionUserEntity.self),
+              let birthDate = UserDefaults.standard.getDecodable(forKey: "birthDate", as: Date.self) else {
             return
         }
 
-        presenter?.didRetrieveSelection(country: country, document: document)
+        let selection = UserSelectionEntity(
+            country: country,
+            document: document,
+            birthDate: birthDate
+        )
+
+        presenter?.didRetrieveSelection(selection)
     }
 
     func sendEventUploadDocumentSuccessfully() {

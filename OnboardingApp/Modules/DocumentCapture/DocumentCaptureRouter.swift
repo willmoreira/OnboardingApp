@@ -1,6 +1,6 @@
 import UIKit
 
-final class DocumentCaptureRouter: DocumentCaptureRouterProtocol {
+final class DocumentCaptureRouter {
 
     // MARK: - Properties
 
@@ -22,4 +22,8 @@ final class DocumentCaptureRouter: DocumentCaptureRouterProtocol {
 
         return view
     }
+}
+
+extension DocumentCaptureRouter: DocumentCaptureRouterProtocol {
+    // TODO: funções de navegação futura
 }
