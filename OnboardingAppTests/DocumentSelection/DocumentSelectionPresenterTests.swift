@@ -27,9 +27,6 @@ final class DocumentSelectionPresenterTests: XCTestCase {
     }
 
     func test_viewDidLoad_callsFetchDocuments() {
-        // Given
-        // (Presenter configurado no setUp)
-
         // When
         presenter.viewDidLoad()
 
@@ -39,29 +36,36 @@ final class DocumentSelectionPresenterTests: XCTestCase {
 
     func test_didFetchDocuments_updatesCountry_and_showsDocuments() {
         // Given
-        let docs = [DocumentSelectionUserEntity(name: "RG", iconName: "person.text.rectangle")]
-        let country = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
+        let docs = [
+            DocumentSelectionEntity.UserEntity(name: "RG", iconName: "person.text.rectangle")
+        ]
+        let country = CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "br")
+        let response = DocumentSelectionEntity.Response(documents: docs)
 
         // When
-        presenter.didFetchDocuments(docs, country)
+        presenter.didFetchDocuments(response)
 
         // Then
         XCTAssertEqual(mockView.shownDocuments, docs)
+        // Se quiser testar a country guardada no presenter (private), pode expor um getter só para teste ou ignorar.
     }
 
     func test_didTapNext_callsSaveSendEventAndNavigate() {
         // Given
-        let docs = [DocumentSelectionUserEntity(name: "CNH", iconName: "car.fill")]
-        let country = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
-        presenter.didFetchDocuments(docs, country)
+        let document = DocumentSelectionEntity.UserEntity(name: "CNH", iconName: "car.fill")
+        mockInteractor.saveSelectedCalled = false
+        mockInteractor.sendEventCalled = false
+        mockRouter.navigated = false
 
         // When
-        presenter.didTapNext(with: docs[0])
+        presenter.didTapNext(with: document)
 
         // Then
-        XCTAssertEqual(mockInteractor.savedCountry?.name, "Brasil")
-        XCTAssertEqual(mockInteractor.savedDocument?.name, "CNH")
+        XCTAssertTrue(mockInteractor.saveSelectedCalled)
+        XCTAssertEqual(mockInteractor.sentRequestForSave?.entity, document)
         XCTAssertTrue(mockInteractor.sendEventCalled)
-        XCTAssertEqual(mockRouter.navigated, true)
+        XCTAssertEqual(mockInteractor.sentRequestForEvent?.entity, document)
+        XCTAssertTrue(mockRouter.navigated)
     }
 }
+

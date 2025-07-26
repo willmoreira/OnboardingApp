@@ -3,11 +3,11 @@ import Foundation
 
 final class DocumentSelectionPresenterMock: DocumentSelectionInteractorOutputProtocol {
 
-    var receivedDocuments: [DocumentSelectionUserEntity] = []
-    var receivedCountry: CountrySelectionEntity?
+    var receivedResponse: DocumentSelectionEntity.Response?
+    var receivedDocuments: [DocumentSelectionEntity.UserEntity] = []
 
-    func didFetchDocuments(_ documents: [DocumentSelectionUserEntity], _ country: CountrySelectionEntity) {
-        receivedDocuments = documents
-        receivedCountry = country
+    func didFetchDocuments(_ response: DocumentSelectionEntity.Response) {
+        receivedResponse = response
+        receivedDocuments = response.documents
     }
 }

@@ -10,7 +10,7 @@ final class DocumentCapturePresenter {
 
     // MARK: - Properties
 
-    private var capturedImage: UIImage?
+    var capturedImage: UIImage?
     private var document: DocumentSelectionEntity.UserEntity?
 
     // MARK: - Initialization

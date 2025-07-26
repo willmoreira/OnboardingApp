@@ -5,13 +5,17 @@ final class DocumentCapturePresenterMock: DocumentCaptureInteractorOutputProtoco
 
     var didUploadSuccessfullyCalled = false
     var didFailToUploadCalled = false
-    var retrievedCountry: CountrySelectionEntity?
-    var retrievedDocument: DocumentSelectionUserEntity?
+    var retrievedSelection: UserSelectionEntity.UserEntity?
 
-    func didUploadDocumentSuccessfully() { didUploadSuccessfullyCalled = true }
-    func didFailToUploadDocument() { didFailToUploadCalled = true }
-    func didRetrieveSelection(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
-        retrievedCountry = country
-        retrievedDocument = document
+    func didRetrieveSelection(_ response: UserSelectionEntity.Response) {
+        retrievedSelection = response.selection
+    }
+
+    func didUploadDocumentSuccessfully() {
+        didUploadSuccessfullyCalled = true
+    }
+
+    func didFailToUploadDocument() {
+        didFailToUploadCalled = true
     }
 }

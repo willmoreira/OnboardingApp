@@ -5,7 +5,7 @@ final class DocumentSelectionInteractor {
     // MARK: - Properties
 
     weak var presenter: DocumentSelectionInteractorOutputProtocol?
-    private let country: CountrySelectionEntity.UserEntity
+    let country: CountrySelectionEntity.UserEntity
     private let eventLogger: EventLogging
 
     // MARK: - Initialization

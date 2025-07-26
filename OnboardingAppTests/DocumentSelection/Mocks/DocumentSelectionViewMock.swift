@@ -3,9 +3,11 @@ import Foundation
 
 final class DocumentSelectionViewMock: DocumentSelectionViewProtocol {
 
-    var shownDocuments: [DocumentSelectionUserEntity] = []
+    var shownViewModel: DocumentSelectionEntity.ViewModel?
+    var shownDocuments: [DocumentSelectionEntity.UserEntity] = []
 
-    func showDocuments(_ documents: [DocumentSelectionUserEntity]) {
-        shownDocuments = documents
+    func showDocuments(_ viewModel: DocumentSelectionEntity.ViewModel) {
+        shownViewModel = viewModel
+        shownDocuments = viewModel.documents
     }
 }

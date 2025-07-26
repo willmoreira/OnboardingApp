@@ -27,7 +27,6 @@ final class CountrySelectionPresenterTests: XCTestCase {
     }
 
     func test_viewDidLoad_callsFetchCountries() {
-        // Given
         // When
         presenter.viewDidLoad()
 
@@ -37,10 +36,13 @@ final class CountrySelectionPresenterTests: XCTestCase {
 
     func test_didFetchCountries_showsCountriesOnView() {
         // Given
-        let mockCountries = [CountrySelectionEntity(name: "Brasil", flagImageName: "br")]
+        let mockCountries = [
+            CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "br")
+        ]
+        let response = CountrySelectionEntity.Response(countries: mockCountries)
 
         // When
-        presenter.didFetchCountries(mockCountries)
+        presenter.didFetchCountries(response)
 
         // Then
         XCTAssertEqual(mockView.shownCountries, mockCountries)
@@ -48,10 +50,11 @@ final class CountrySelectionPresenterTests: XCTestCase {
 
     func test_didTapNext_sendsEvent_and_navigates() {
         // Given
-        let country = CountrySelectionEntity(name: "Japão", flagImageName: "jp")
+        let country = CountrySelectionEntity.UserEntity(name: "Japão", flagImageName: "jp")
+        let request = CountrySelectionEntity.Request(entity: country)
 
         // When
-        presenter.didTapNext(with: country)
+        presenter.didTapNext(with: request)
 
         // Then
         XCTAssertTrue(mockInteractor.sendEventCalled)

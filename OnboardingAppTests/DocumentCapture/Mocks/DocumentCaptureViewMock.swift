@@ -2,14 +2,14 @@ import UIKit
 @testable import OnboardingApp
 
 final class DocumentCaptureViewMock: DocumentCaptureViewProtocol {
-
-    var showErrorMessageCalled = false
-    var showSuccessMessageCalled = false
-    var showLoadingCalled = false
-    var hideLoadingCalled = false
-    var capturedImage: UIImage?
-    var displayedCountryName: String?
-    var displayedDocumentName: String?
+    
+    private(set) var showErrorMessageCalled = false
+    private(set) var showSuccessMessageCalled = false
+    private(set) var showLoadingCalled = false
+    private(set) var hideLoadingCalled = false
+    private(set) var displayedCountryName: String?
+    private(set) var displayedDocumentName: String?
+    private(set) var displayBirthDateFormattedCalled = false
 
     func showErrorMessage() {
         showErrorMessageCalled = true
@@ -19,8 +19,8 @@ final class DocumentCaptureViewMock: DocumentCaptureViewProtocol {
         showSuccessMessageCalled = true
     }
 
-    func showLoading(_ isLoading: Bool) {
-        if isLoading {
+    func showLoading(_ show: Bool) {
+        if show {
             showLoadingCalled = true
         } else {
             hideLoadingCalled = true
@@ -28,14 +28,12 @@ final class DocumentCaptureViewMock: DocumentCaptureViewProtocol {
     }
 
     func showCapturedImage(_ image: UIImage) {
-        capturedImage = image
+        // opcional
     }
 
-    func displaySelectedCountry(_ countryName: String) {
-        displayedCountryName = countryName
-    }
-
-    func displaySelectedDocument(_ documentName: String) {
-        displayedDocumentName = documentName
+    func displayUserSelection(_ viewModel: UserSelectionEntity.ViewModel) {
+        displayedCountryName = viewModel.countryName
+        displayedDocumentName = viewModel.documentName
+        displayBirthDateFormattedCalled = true
     }
 }
