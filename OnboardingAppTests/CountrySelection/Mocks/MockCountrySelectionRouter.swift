@@ -1,12 +1,11 @@
 import Foundation
 @testable import OnboardingApp
-import CoreKit
 
 final class MockCountrySelectionRouter: CountrySelectionRouterProtocol {
     private(set) var navigatedToDocumentSelection = false
-    private(set) var selectedCountry: Country?
+    private(set) var selectedCountry: CountrySelectionEntity?
 
-    func navigateToDocumentSelection(with country: Country) {
+    func navigateToDocumentSelection(with country: CountrySelectionEntity) {
         navigatedToDocumentSelection = true
         selectedCountry = country
     }

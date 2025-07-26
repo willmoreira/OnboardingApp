@@ -1,13 +1,13 @@
 import UIKit
 
 final class DocumentCaptureViewController: UIViewController {
-    
+
     // MARK: - Properties
 
     var presenter: DocumentCapturePresenterProtocol!
 
     // MARK: - UI Components
-    
+
     private lazy var imageView: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +49,7 @@ final class DocumentCaptureViewController: UIViewController {
         button.addTarget(self, action: #selector(sendTapped), for: .touchUpInside)
         return button
     }()
-    
+
     private lazy var clearButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +71,7 @@ final class DocumentCaptureViewController: UIViewController {
         loader.hidesWhenStopped = true
         return loader
     }()
-    
+
     private lazy var countryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -87,7 +87,7 @@ final class DocumentCaptureViewController: UIViewController {
         label.textColor = .label
         return label
     }()
-    
+
     private lazy var loadingOverlay: UIView = {
         let overlay = UIView()
         overlay.translatesAutoresizingMaskIntoConstraints = false
@@ -95,7 +95,7 @@ final class DocumentCaptureViewController: UIViewController {
         overlay.isHidden = true
         return overlay
     }()
-    
+
     private lazy var buttonStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [clearButton, sendButton])
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +116,7 @@ final class DocumentCaptureViewController: UIViewController {
         setupLayout()
         configureAccessibility()
     }
-    
+
     // MARK: - Actions
 
     @objc private func clearTapped() {
@@ -126,7 +126,7 @@ final class DocumentCaptureViewController: UIViewController {
         clearButton.isEnabled = false
         clearButton.alpha = 0.3
     }
-    
+
     @objc private func captureTapped() {
         presenter.didTapCapture()
     }
@@ -134,7 +134,7 @@ final class DocumentCaptureViewController: UIViewController {
     @objc private func sendTapped() {
         presenter.didTapSend()
     }
-    
+
     private func configureAccessibility() {
         countryLabel.isAccessibilityElement = true
         countryLabel.accessibilityLabel = "País selecionado"
@@ -155,7 +155,7 @@ final class DocumentCaptureViewController: UIViewController {
         sendButton.isAccessibilityElement = true
         sendButton.accessibilityLabel = "Enviar documento"
         sendButton.accessibilityHint = "Envia a imagem capturada do documento"
-        
+
         clearButton.isAccessibilityElement = true
         clearButton.accessibilityLabel = "Limpar captura"
         clearButton.accessibilityHint = "Remove a imagem capturada"
@@ -164,13 +164,13 @@ final class DocumentCaptureViewController: UIViewController {
         activityIndicator.accessibilityLabel = "Carregando"
         activityIndicator.accessibilityTraits = .updatesFrequently
     }
-    
+
     // MARK: - Layout
 
     private func setupLayout() {
         clearButton.isEnabled = false
         clearButton.alpha = 0.3
-        
+
         view.addSubview(countryLabel)
         view.addSubview(documentLabel)
         view.addSubview(imageView)
@@ -195,21 +195,21 @@ final class DocumentCaptureViewController: UIViewController {
             buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             buttonStackView.heightAnchor.constraint(equalToConstant: 40),
-            
+
             captureButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             captureButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
             captureButton.heightAnchor.constraint(equalToConstant: 32),
             captureButton.widthAnchor.constraint(equalToConstant: 196),
-            
+
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
+
             loadingOverlay.topAnchor.constraint(equalTo: view.topAnchor),
             loadingOverlay.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             loadingOverlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             loadingOverlay.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
+
         view.bringSubviewToFront(activityIndicator)
         view.bringSubviewToFront(loadingOverlay)
     }
@@ -229,23 +229,27 @@ extension DocumentCaptureViewController: DocumentCaptureViewProtocol {
 
     func showLoading(_ show: Bool) {
         loadingOverlay.isHidden = !show
-        show ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+
+        if show {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
     }
 
     func showSuccessMessage() {
         let alert = UIAlertController(title: "Sucesso", message: "Documento enviado com sucesso!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
-        
+
         UIAccessibility.post(notification: .announcement, argument: "Documento enviado com sucesso")
     }
-
 
     func showErrorMessage() {
         let alert = UIAlertController(title: "Erro", message: "Erro ao carregar a imagem", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
-        
+
         UIAccessibility.post(notification: .announcement, argument: "Erro ao carregar a imagem")
     }
 

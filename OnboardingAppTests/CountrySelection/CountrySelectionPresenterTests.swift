@@ -1,6 +1,5 @@
 import XCTest
 @testable import OnboardingApp
-import CoreKit
 
 final class CountrySelectionPresenterTests: XCTestCase {
 
@@ -28,20 +27,33 @@ final class CountrySelectionPresenterTests: XCTestCase {
     }
 
     func test_viewDidLoad_callsFetchCountries() {
+        // Given
+        // When
         presenter.viewDidLoad()
+
+        // Then
         XCTAssertTrue(mockInteractor.fetchCountriesCalled)
     }
 
     func test_didFetchCountries_showsCountriesOnView() {
-        let mockCountries = [Country(name: "Brasil", flagImageName: "br")]
+        // Given
+        let mockCountries = [CountrySelectionEntity(name: "Brasil", flagImageName: "br")]
+
+        // When
         presenter.didFetchCountries(mockCountries)
+
+        // Then
         XCTAssertEqual(mockView.shownCountries, mockCountries)
     }
 
     func test_didTapNext_sendsEvent_and_navigates() {
-        let country = Country(name: "Japão", flagImageName: "jp")
+        // Given
+        let country = CountrySelectionEntity(name: "Japão", flagImageName: "jp")
+
+        // When
         presenter.didTapNext(with: country)
 
+        // Then
         XCTAssertTrue(mockInteractor.sendEventCalled)
         XCTAssertEqual(mockInteractor.sentCountry, country)
 
@@ -49,3 +61,4 @@ final class CountrySelectionPresenterTests: XCTestCase {
         XCTAssertEqual(mockRouter.selectedCountry, country)
     }
 }
+

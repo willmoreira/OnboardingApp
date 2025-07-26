@@ -1,7 +1,7 @@
 import UIKit
 
 final class DocumentCaptureRouter: DocumentCaptureRouterProtocol {
-    
+
     // MARK: - Properties
 
     weak var coordinator: AppCoordinator?

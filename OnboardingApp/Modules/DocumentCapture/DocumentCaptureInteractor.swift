@@ -1,8 +1,7 @@
 import UIKit
-import CoreKit
 
 final class DocumentCaptureInteractor {
-    
+
     // MARK: - Properties
 
     weak var presenter: DocumentCaptureInteractorOutputProtocol?
@@ -20,14 +19,14 @@ final class DocumentCaptureInteractor {
 // MARK: - DocumentCaptureInteractorProtocol
 
 extension DocumentCaptureInteractor: DocumentCaptureInteractorProtocol {
-    
+
     func uploadDocument(_ image: UIImage) {
-        
+
         eventLogger.sendEvent("send_document")
 
         uploadService.upload(image: image) { [weak self] result in
             guard let self = self else { return }
-            
+
             switch result {
             case .success:
                 self.presenter?.didUploadDocumentSuccessfully()
@@ -36,24 +35,20 @@ extension DocumentCaptureInteractor: DocumentCaptureInteractorProtocol {
             }
         }
     }
-    
+
     func fetchSavedSelection() {
-        guard let country = UserDefaults.standard.getDecodable(
-            forKey: "selectedCountry",
-            as: Country.self),
-              let document = UserDefaults.standard.getDecodable(
-                forKey: "selectedDocument",
-                as: Document.self) else {
+        guard let country = UserDefaults.standard.getDecodable(forKey: "selectedCountry", as: CountrySelectionEntity.self),
+              let document = UserDefaults.standard.getDecodable(forKey: "selectedDocument",as: DocumentSelectionUserEntity.self) else {
             return
         }
-        
+
         presenter?.didRetrieveSelection(country: country, document: document)
     }
-    
+
     func sendEventUploadDocumentSuccessfully() {
         eventLogger.sendEvent("upload_document_successfully")
     }
-    
+
     func sendEventFailToUploadDocument() {
         eventLogger.sendEvent("fail_to_upload_document")
     }

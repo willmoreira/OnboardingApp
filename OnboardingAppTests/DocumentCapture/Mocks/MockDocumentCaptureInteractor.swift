@@ -1,6 +1,5 @@
 import UIKit
 @testable import OnboardingApp
-import CoreKit
 
 final class MockDocumentCaptureInteractor: DocumentCaptureInteractorProtocol {
 

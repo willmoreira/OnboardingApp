@@ -1,6 +1,5 @@
 import XCTest
 @testable import OnboardingApp
-import CoreKit
 
 final class DocumentSelectionPresenterTests: XCTestCase {
 
@@ -28,30 +27,41 @@ final class DocumentSelectionPresenterTests: XCTestCase {
     }
 
     func test_viewDidLoad_callsFetchDocuments() {
+        // Given
+        // (Presenter configurado no setUp)
+
+        // When
         presenter.viewDidLoad()
+
+        // Then
         XCTAssertTrue(mockInteractor.fetchDocumentsCalled)
     }
 
     func test_didFetchDocuments_updatesCountry_and_showsDocuments() {
-        let docs = [Document(name: "RG", iconName: "person.text.rectangle")]
-        let country = Country(name: "Brasil", flagImageName: "br")
+        // Given
+        let docs = [DocumentSelectionUserEntity(name: "RG", iconName: "person.text.rectangle")]
+        let country = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
 
+        // When
         presenter.didFetchDocuments(docs, country)
 
+        // Then
         XCTAssertEqual(mockView.shownDocuments, docs)
     }
 
     func test_didTapNext_callsSaveSendEventAndNavigate() {
-        let docs = [Document(name: "CNH", iconName: "car.fill")]
-        let country = Country(name: "Brasil", flagImageName: "br")
+        // Given
+        let docs = [DocumentSelectionUserEntity(name: "CNH", iconName: "car.fill")]
+        let country = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
         presenter.didFetchDocuments(docs, country)
 
+        // When
         presenter.didTapNext(with: docs[0])
 
-        XCTAssertEqual(mockView.savedCountry?.name, "Brasil")
-        XCTAssertEqual(mockView.savedDocument?.name, "CNH")
+        // Then
+        XCTAssertEqual(mockInteractor.savedCountry?.name, "Brasil")
+        XCTAssertEqual(mockInteractor.savedDocument?.name, "CNH")
         XCTAssertTrue(mockInteractor.sendEventCalled)
         XCTAssertEqual(mockRouter.navigated, true)
     }
 }
-

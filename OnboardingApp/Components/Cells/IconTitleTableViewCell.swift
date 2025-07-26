@@ -1,5 +1,4 @@
 import UIKit
-import CoreKit
 
 final class IconTitleTableViewCell: UITableViewCell {
 

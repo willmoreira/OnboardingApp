@@ -1,5 +1,4 @@
 import UIKit
-import CoreKit
 
 protocol DocumentCaptureViewProtocol: AnyObject {
     func showCapturedImage(_ image: UIImage)
@@ -14,7 +13,7 @@ protocol DocumentCapturePresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapSend()
     func didTapCapture()
-    func didRetrieveSelection(country: Country, document: Document)
+    func didRetrieveSelection(country: CountrySelectionEntity, document: DocumentSelectionUserEntity)
 }
 
 protocol DocumentCaptureInteractorProtocol: AnyObject {
@@ -25,7 +24,7 @@ protocol DocumentCaptureInteractorProtocol: AnyObject {
 }
 
 protocol DocumentCaptureInteractorOutputProtocol: AnyObject {
-    func didRetrieveSelection(country: Country, document: Document)
+    func didRetrieveSelection(country: CountrySelectionEntity, document: DocumentSelectionUserEntity)
     func didUploadDocumentSuccessfully()
     func didFailToUploadDocument()
 }

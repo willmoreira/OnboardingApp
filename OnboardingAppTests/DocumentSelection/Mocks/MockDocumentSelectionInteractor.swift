@@ -1,20 +1,27 @@
 import Foundation
 @testable import OnboardingApp
-import CoreKit
 
 final class MockDocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
+    
     var fetchDocumentsCalled = false
     var sendEventCalled = false
-    var sentCountry: Country?
-    var sentDocument: Document?
+    var sentCountry: CountrySelectionEntity?
+    var sentDocument: DocumentSelectionUserEntity?
+    var savedCountry: CountrySelectionEntity?
+    var savedDocument: DocumentSelectionUserEntity?
 
     func fetchDocuments() {
         fetchDocumentsCalled = true
     }
 
-    func sendEvent(country: Country, document: Document) {
+    func sendEvent(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
         sendEventCalled = true
         sentCountry = country
         sentDocument = document
+    }
+    
+    func saveSelectedCountryAndDocument(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
+        savedCountry = country
+        savedDocument = document
     }
 }

@@ -1,11 +1,10 @@
 import Foundation
 @testable import OnboardingApp
-import CoreKit
 
 final class MockCountrySelectionView: CountrySelectionViewProtocol {
-    private(set) var shownCountries: [Country] = []
+    private(set) var shownCountries: [CountrySelectionEntity] = []
 
-    func showCountries(_ countries: [Country]) {
+    func showCountries(_ countries: [CountrySelectionEntity]) {
         shownCountries = countries
     }
 }

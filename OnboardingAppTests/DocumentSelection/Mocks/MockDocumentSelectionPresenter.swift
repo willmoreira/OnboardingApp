@@ -1,12 +1,11 @@
 import Foundation
 @testable import OnboardingApp
-import CoreKit
 
 final class MockDocumentSelectionPresenter: DocumentSelectionInteractorOutputProtocol {
-    var receivedDocuments: [Document] = []
-    var receivedCountry: Country?
+    var receivedDocuments: [DocumentSelectionUserEntity] = []
+    var receivedCountry: CountrySelectionEntity?
 
-    func didFetchDocuments(_ documents: [Document], _ country: Country) {
+    func didFetchDocuments(_ documents: [DocumentSelectionUserEntity], _ country: CountrySelectionEntity) {
         receivedDocuments = documents
         receivedCountry = country
     }

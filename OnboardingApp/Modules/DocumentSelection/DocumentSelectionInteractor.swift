@@ -1,16 +1,16 @@
-import CoreKit
+import UIKit
 
 final class DocumentSelectionInteractor {
-    
+
     // MARK: - Properties
 
     weak var presenter: DocumentSelectionInteractorOutputProtocol?
-    private let country: Country
+    private let country: CountrySelectionEntity
     private let eventLogger: EventLogging
 
     // MARK: - Initialization
 
-    init(country: Country, eventLogger: EventLogging) {
+    init(country: CountrySelectionEntity, eventLogger: EventLogging) {
         self.country = country
         self.eventLogger = eventLogger
     }
@@ -19,31 +19,36 @@ final class DocumentSelectionInteractor {
 // MARK: - DocumentSelectionInteractorProtocol
 
 extension DocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
-   
+
     func fetchDocuments() {
-        let documents: [Document]
+        let documents: [DocumentSelectionUserEntity]
 
         switch country.name {
         case "Brasil":
             documents = [
-                Document(name: "RG", iconName: "person.text.rectangle"),
-                Document(name: "CNH", iconName: "car.fill")
+                DocumentSelectionUserEntity(name: "RG", iconName: "person.text.rectangle"),
+                DocumentSelectionUserEntity(name: "CNH", iconName: "car.fill")
             ]
         case "Estados Unidos":
             documents = [
-                Document(name: "Driver License", iconName: "car.circle"),
-                Document(name: "Passaporte", iconName: "globe.americas.fill")
+                DocumentSelectionUserEntity(name: "Driver License", iconName: "car.circle"),
+                DocumentSelectionUserEntity(name: "Passport", iconName: "globe.americas.fill")
             ]
         default:
             documents = [
-                Document(name: "Passport", iconName: "globe")
+                DocumentSelectionUserEntity(name: "Passport", iconName: "globe")
             ]
         }
 
         presenter?.didFetchDocuments(documents, country)
     }
-    
-    func sendEvent(country: Country, document: Document) {
+
+    func sendEvent(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
         eventLogger.sendEvent("tapped_select_document", parameters: ["document": document.name])
+    }
+
+    func saveSelectedCountryAndDocument(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
+        UserDefaults.standard.setEncodable(country, forKey: "selectedCountry")
+        UserDefaults.standard.setEncodable(document, forKey: "selectedDocument")
     }
 }

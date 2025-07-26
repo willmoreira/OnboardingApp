@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 extension UserDefaults {
     func setEncodable<T: Encodable>(_ object: T, forKey key: String) {

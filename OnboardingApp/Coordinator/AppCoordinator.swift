@@ -1,5 +1,4 @@
 import UIKit
-import CoreKit
 
 protocol Coordinator {
     var navigationController: UINavigationController { get set }
@@ -18,18 +17,18 @@ final class AppCoordinator: Coordinator {
         navigationController.pushViewController(module, animated: true)
     }
 
-    func goToDocumentSelection(with country: Country) {
+    func goToDocumentSelection(with country: CountrySelectionEntity) {
         setCustomBackButton()
         let module = DocumentSelectionRouter.createModule(coordinator: self, country: country)
         navigationController.pushViewController(module, animated: true)
     }
-    
+
     func goToDocumentCapture() {
         setCustomBackButton()
         let module = DocumentCaptureRouter.createModule(coordinator: self)
         navigationController.pushViewController(module, animated: true)
     }
-    
+
     private func setCustomBackButton() {
         if let currentVC = navigationController.topViewController {
             let backButton = UIBarButtonItem()

@@ -1,13 +1,10 @@
 import Foundation
 @testable import OnboardingApp
-import CoreKit
 
 final class MockCountrySelectionPresenter: CountrySelectionInteractorOutputProtocol {
-    private(set) var fetchedCountries: [Country] = []
+    private(set) var fetchedCountries: [CountrySelectionEntity] = []
 
-    func didFetchCountries(_ countries: [Country]) {
+    func didFetchCountries(_ countries: [CountrySelectionEntity]) {
         fetchedCountries = countries
     }
 }
-
-

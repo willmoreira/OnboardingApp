@@ -1,5 +1,4 @@
 import UIKit
-import CoreKit
 
 final class CountrySelectionViewController: UIViewController {
 
@@ -7,8 +6,8 @@ final class CountrySelectionViewController: UIViewController {
 
     var presenter: CountrySelectionPresenterProtocol!
 
-    private var countries: [Country] = []
-    private var selectedCountry: Country?
+    private var countries: [CountrySelectionEntity] = []
+    private var selectedCountry: CountrySelectionEntity?
     private var selectedIndexPath: IndexPath?
 
     // MARK: - UI Components
@@ -88,7 +87,7 @@ final class CountrySelectionViewController: UIViewController {
 // MARK: - CountrySelectionViewProtocol
 
 extension CountrySelectionViewController: CountrySelectionViewProtocol {
-    func showCountries(_ countries: [Country]) {
+    func showCountries(_ countries: [CountrySelectionEntity]) {
         self.countries = countries
         tableView.reloadData()
     }
@@ -105,7 +104,10 @@ extension CountrySelectionViewController: UITableViewDataSource, UITableViewDele
         let country = countries[indexPath.row]
         let isSelected = (indexPath == selectedIndexPath)
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "IconTitleCell", for: indexPath) as? IconTitleTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "IconTitleCell",
+            for: indexPath
+        ) as? IconTitleTableViewCell else {
             return UITableViewCell()
         }
 

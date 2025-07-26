@@ -1,5 +1,4 @@
 import UIKit
-import CoreKit
 
 final class CountrySelectionRouter: CountrySelectionRouterProtocol {
 
@@ -31,8 +30,7 @@ final class CountrySelectionRouter: CountrySelectionRouterProtocol {
 
     // MARK: - Navigation
 
-    func navigateToDocumentSelection(with country: Country) {
+    func navigateToDocumentSelection(with country: CountrySelectionEntity) {
         coordinator?.goToDocumentSelection(with: country)
     }
 }
-

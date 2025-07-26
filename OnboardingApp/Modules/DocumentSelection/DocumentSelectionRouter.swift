@@ -1,16 +1,17 @@
 import UIKit
 
-import CoreKit
-
 final class DocumentSelectionRouter: DocumentSelectionRouterProtocol {
-    
+
     // MARK: - Properties
 
     weak var coordinator: AppCoordinator?
 
     // MARK: - Module Creation
 
-    static func createModule(coordinator: AppCoordinator, country: Country) -> UIViewController {
+    static func createModule(
+        coordinator: AppCoordinator,
+        country: CountrySelectionEntity
+    ) -> UIViewController {
         let view = DocumentSelectionViewController()
         let eventLogger = ConsoleEventLogger()
         let interactor = DocumentSelectionInteractor(country: country, eventLogger: eventLogger)
@@ -20,10 +21,10 @@ final class DocumentSelectionRouter: DocumentSelectionRouterProtocol {
         view.presenter = presenter
         interactor.presenter = presenter
         router.coordinator = coordinator
-        
+
         return view
     }
-    
+
     // MARK: - Navigation
 
     func navigateToDocumentCapture() {

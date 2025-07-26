@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		3DF7780C2E33E5EA009218AE /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3DF7780B2E33E5EA009218AE /* CoreKit */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		3DE306602E32D83E00117698 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -35,6 +31,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3DD5B9BA2E3450CE00137123 /* Exceptions for "OnboardingApp" folder in "OnboardingAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Utlis/Extensions/CodableUserDefaults.swift,
+			);
+			target = 3DE3065E2E32D83E00117698 /* OnboardingAppTests */;
+		};
+		3DD5B9C02E34521000137123 /* Exceptions for "OnboardingApp" folder in "OnboardingAppUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Utlis/Extensions/CodableUserDefaults.swift,
+			);
+			target = 3DE306682E32D83E00117698 /* OnboardingAppUITests */;
+		};
 		3DE306712E32D83E00117698 /* Exceptions for "OnboardingApp" folder in "OnboardingApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -49,6 +59,8 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				3DE306712E32D83E00117698 /* Exceptions for "OnboardingApp" folder in "OnboardingApp" target */,
+				3DD5B9BA2E3450CE00137123 /* Exceptions for "OnboardingApp" folder in "OnboardingAppTests" target */,
+				3DD5B9C02E34521000137123 /* Exceptions for "OnboardingApp" folder in "OnboardingAppUITests" target */,
 			);
 			path = OnboardingApp;
 			sourceTree = "<group>";
@@ -70,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DF7780C2E33E5EA009218AE /* CoreKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +141,7 @@
 				3DE306452E32D83D00117698 /* Sources */,
 				3DE306462E32D83D00117698 /* Frameworks */,
 				3DE306472E32D83D00117698 /* Resources */,
+				3D583AE22E342662000BB827 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -140,7 +152,6 @@
 			);
 			name = OnboardingApp;
 			packageProductDependencies = (
-				3DF7780B2E33E5EA009218AE /* CoreKit */,
 			);
 			productName = OnboardingApp;
 			productReference = 3DE306492E32D83D00117698 /* OnboardingApp.app */;
@@ -225,7 +236,6 @@
 			mainGroup = 3DE306402E32D83C00117698;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				3DF7780A2E33E5EA009218AE /* XCRemoteSwiftPackageReference "CoreKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3DE3064A2E32D83D00117698 /* Products */;
@@ -262,6 +272,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3D583AE22E342662000BB827 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Build Phases -> Run script phase for Apple Silicon chips\n# Adds support for Apple Silicon brew directory\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint; then\n    swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3DE306452E32D83D00117698 /* Sources */ = {
@@ -309,6 +340,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZZG85XAAJ4;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnboardingApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -337,6 +369,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZZG85XAAJ4;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnboardingApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -590,25 +623,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		3DF7780A2E33E5EA009218AE /* XCRemoteSwiftPackageReference "CoreKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/willmoreira/CoreKit.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		3DF7780B2E33E5EA009218AE /* CoreKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DF7780A2E33E5EA009218AE /* XCRemoteSwiftPackageReference "CoreKit" */;
-			productName = CoreKit;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3DE306412E32D83C00117698 /* Project object */;
 }

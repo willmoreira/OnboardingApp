@@ -1,8 +1,7 @@
 import UIKit
-import CoreKit
 
 final class DocumentCapturePresenter {
-    
+
     // MARK: - VIP Properties
 
     weak var view: DocumentCaptureViewProtocol?
@@ -12,8 +11,8 @@ final class DocumentCapturePresenter {
     // MARK: - Properties
 
     private var capturedImage: UIImage?
-    private var document: Document?
-    
+    private var document: DocumentSelectionUserEntity?
+
     // MARK: - Initialization
 
     init(view: DocumentCaptureViewProtocol,
@@ -32,7 +31,7 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
     func viewDidLoad() {
         interactor.fetchSavedSelection()
     }
-    
+
     func didTapSend() {
         guard let image = capturedImage else {
             view?.showErrorMessage()
@@ -42,7 +41,7 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
         view?.showLoading(true)
         interactor.uploadDocument(image)
     }
-    
+
     func didTapCapture() {
         let type = DocumentType(from: document)
         let imageName = type.imageName
@@ -59,13 +58,13 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
 // MARK: - DocumentCaptureInteractorOutputProtocol
 
 extension DocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
-   
-    func didRetrieveSelection(country: Country, document: Document) {
+
+    func didRetrieveSelection(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
         self.document = document
         view?.displaySelectedCountry(country.name)
         view?.displaySelectedDocument(document.name)
     }
-    
+
     func didUploadDocumentSuccessfully() {
         view?.showLoading(false)
         interactor.sendEventUploadDocumentSuccessfully()

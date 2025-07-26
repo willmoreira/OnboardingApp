@@ -1,17 +1,16 @@
 import Foundation
 @testable import OnboardingApp
-import CoreKit
 
 final class MockDocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
-    
+
     var didUploadSuccessfullyCalled = false
     var didFailToUploadCalled = false
-    var retrievedCountry: Country?
-    var retrievedDocument: Document?
+    var retrievedCountry: CountrySelectionEntity?
+    var retrievedDocument: DocumentSelectionUserEntity?
 
     func didUploadDocumentSuccessfully() { didUploadSuccessfullyCalled = true }
     func didFailToUploadDocument() { didFailToUploadCalled = true }
-    func didRetrieveSelection(country: Country, document: Document) {
+    func didRetrieveSelection(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
         retrievedCountry = country
         retrievedDocument = document
     }

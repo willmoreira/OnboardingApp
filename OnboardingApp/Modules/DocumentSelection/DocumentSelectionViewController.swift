@@ -1,14 +1,13 @@
 import UIKit
-import CoreKit
 
 final class DocumentSelectionViewController: UIViewController {
-    
+
     // MARK: - Properties
 
     var presenter: DocumentSelectionPresenterProtocol!
 
-    private var documents: [Document] = []
-    private var selectedDocument: Document?
+    private var documents: [DocumentSelectionUserEntity] = []
+    private var selectedDocument: DocumentSelectionUserEntity?
     private var selectedIndexPath: IndexPath?
 
     // MARK: - UI Components
@@ -56,7 +55,7 @@ final class DocumentSelectionViewController: UIViewController {
 
         UIAccessibility.post(notification: .screenChanged, argument: title)
     }
-    
+
     // MARK: - Actions
 
     @objc private func nextButtonTapped() {
@@ -90,22 +89,17 @@ final class DocumentSelectionViewController: UIViewController {
 // MARK: - DocumentSelectionViewProtocol
 
 extension DocumentSelectionViewController: DocumentSelectionViewProtocol {
-    
-    func showDocuments(_ documents: [Document]) {
+
+    func showDocuments(_ documents: [DocumentSelectionUserEntity]) {
         self.documents = documents
         tableView.reloadData()
-    }
-    
-    func saveSelectedCountryAndDocument(country: Country, document: Document) {
-        UserDefaults.standard.setEncodable(country, forKey: "selectedCountry")
-        UserDefaults.standard.setEncodable(document, forKey: "selectedDocument")
     }
 }
 
 // MARK: - UITableViewDataSource & UITableViewDelegate
 
 extension DocumentSelectionViewController: UITableViewDataSource, UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return documents.count
     }
@@ -114,7 +108,9 @@ extension DocumentSelectionViewController: UITableViewDataSource, UITableViewDel
         let doc = documents[indexPath.row]
         let isSelected = (indexPath == selectedIndexPath)
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "IconTitleCell", for: indexPath) as? IconTitleTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "IconTitleCell",
+            for: indexPath) as? IconTitleTableViewCell else {
             return UITableViewCell()
         }
 

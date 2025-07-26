@@ -1,6 +1,5 @@
 import XCTest
 @testable import OnboardingApp
-import CoreKit
 
 final class DocumentCapturePresenterTests: XCTestCase {
 
@@ -26,43 +25,66 @@ final class DocumentCapturePresenterTests: XCTestCase {
     }
 
     func test_viewDidLoad_callsFetchSavedSelection() {
+        // Given
+        // When
         presenter.viewDidLoad()
+
+        // Then
         XCTAssertTrue(mockInteractor.fetchSavedSelectionCalled)
     }
 
     func test_didTapSend_withoutImage_showsError() {
+        // Given
+        // When
         presenter.didTapSend()
+
+        // Then
         XCTAssertTrue(mockView.showErrorMessageCalled)
     }
 
     func test_didTapSend_withImage_uploadsDocument() {
+        // Given
         presenter.didTapCapture()
+
+        // When
         presenter.didTapSend()
-        
+
+        // Then
         XCTAssertTrue(mockView.showLoadingCalled)
         XCTAssertTrue(mockInteractor.uploadDocumentCalled)
     }
 
     func test_didUploadDocumentSuccessfully_behaviour() {
+        // Given
+        // When
         presenter.didUploadDocumentSuccessfully()
+
+        // Then
         XCTAssertTrue(mockView.hideLoadingCalled)
         XCTAssertTrue(mockInteractor.sendEventUploadDocumentSuccessfullyCalled)
         XCTAssertTrue(mockView.showSuccessMessageCalled)
     }
 
     func test_didFailToUploadDocument_behaviour() {
+        // Given
+        // When
         presenter.didFailToUploadDocument()
+
+        // Then
         XCTAssertTrue(mockView.hideLoadingCalled)
         XCTAssertTrue(mockInteractor.sendEventFailToUploadDocumentCalled)
         XCTAssertTrue(mockView.showErrorMessageCalled)
     }
 
     func test_didRetrieveSelection_updatesView() {
-        let country = Country(name: "Brasil", flagImageName: "br")
-        let document = Document(name: "CNH", iconName: "car.fill")
+        // Given
+        let country = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
+        let document = DocumentSelectionUserEntity(name: "CNH", iconName: "car.fill")
 
+        // When
         presenter.didRetrieveSelection(country: country, document: document)
 
+        // Then
         XCTAssertEqual(mockView.displayedCountryName, "Brasil")
         XCTAssertEqual(mockView.displayedDocumentName, "CNH")
     }

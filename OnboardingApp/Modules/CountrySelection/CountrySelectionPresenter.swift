@@ -1,5 +1,3 @@
-import CoreKit
-
 final class CountrySelectionPresenter {
 
     // MARK: - VIP Properties
@@ -22,12 +20,12 @@ final class CountrySelectionPresenter {
 // MARK: - CountrySelectionPresenterProtocol
 
 extension CountrySelectionPresenter: CountrySelectionPresenterProtocol {
-    
+
     func viewDidLoad() {
         interactor.fetchCountries()
     }
 
-    func didTapNext(with country: Country) {
+    func didTapNext(with country: CountrySelectionEntity) {
         interactor.sendEventTap(with: country)
         router.navigateToDocumentSelection(with: country)
     }
@@ -36,9 +34,8 @@ extension CountrySelectionPresenter: CountrySelectionPresenterProtocol {
 // MARK: - CountrySelectionInteractorOutputProtocol
 
 extension CountrySelectionPresenter: CountrySelectionInteractorOutputProtocol {
-    
-    func didFetchCountries(_ countries: [Country]) {
+
+    func didFetchCountries(_ countries: [CountrySelectionEntity]) {
         view?.showCountries(countries)
     }
 }
-

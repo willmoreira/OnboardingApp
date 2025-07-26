@@ -1,6 +1,5 @@
 import XCTest
 @testable import OnboardingApp
-import CoreKit
 
 final class CountrySelectionInteractorTests: XCTestCase {
 
@@ -24,20 +23,24 @@ final class CountrySelectionInteractorTests: XCTestCase {
     }
 
     func test_fetchCountries_returnsMockList() {
+        // When
         interactor.fetchCountries()
 
+        // Then
         XCTAssertEqual(mockPresenter.fetchedCountries.count, 5)
         XCTAssertEqual(mockPresenter.fetchedCountries[0].name, "Brasil")
     }
 
     func test_sendEventTap_logsCorrectEvent() {
-        let country = Country(name: "Brasil", flagImageName: "br")
+        // Given
+        let country = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
 
+        // When
         interactor.sendEventTap(with: country)
 
+        // Then
         XCTAssertEqual(mockLogger.loggedEvents.count, 1)
         XCTAssertEqual(mockLogger.loggedEvents.first?.event, "tapped_select_country")
         XCTAssertEqual(mockLogger.loggedEvents.first?.parameters?["country"] as? String, "Brasil")
     }
 }
-

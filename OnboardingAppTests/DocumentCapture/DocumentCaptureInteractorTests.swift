@@ -1,6 +1,5 @@
 import XCTest
 @testable import OnboardingApp
-import CoreKit
 
 final class DocumentCaptureInteractorTests: XCTestCase {
 
@@ -27,41 +26,59 @@ final class DocumentCaptureInteractorTests: XCTestCase {
     }
 
     func test_uploadDocument_success_callsDidUploadDocumentSuccessfully() {
+        // Given
         mockUploadService.result = .success(())
 
+        // When
         interactor.uploadDocument(UIImage())
 
+        // Then
         XCTAssertTrue(mockLogger.loggedEvents.contains { $0.event == "send_document" })
         XCTAssertTrue(mockPresenter.didUploadSuccessfullyCalled)
     }
 
     func test_uploadDocument_failure_callsDidFailToUploadDocument() {
+        // Given
         mockUploadService.result = .failure(NSError(domain: "test", code: 1))
 
+        // When
         interactor.uploadDocument(UIImage())
 
+        // Then
         XCTAssertTrue(mockPresenter.didFailToUploadCalled)
     }
 
     func test_fetchSavedSelection_callsPresenterWithValidData() {
-        let mockCountry = Country(name: "Brasil", flagImageName: "br")
-        let mockDocument = Document(name: "CNH", iconName: "car.fill")
+        // Given
+        let mockCountry = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
+        let mockDocument = DocumentSelectionUserEntity(name: "CNH", iconName: "car.fill")
         UserDefaults.standard.setEncodable(mockCountry, forKey: "selectedCountry")
         UserDefaults.standard.setEncodable(mockDocument, forKey: "selectedDocument")
 
+        // When
         interactor.fetchSavedSelection()
 
+        // Then
         XCTAssertEqual(mockPresenter.retrievedCountry?.name, "Brasil")
         XCTAssertEqual(mockPresenter.retrievedDocument?.name, "CNH")
     }
 
     func test_sendEventUploadDocumentSuccessfully_logsCorrectEvent() {
+        // Given
+        // When
         interactor.sendEventUploadDocumentSuccessfully()
+
+        // Then
         XCTAssertTrue(mockLogger.loggedEvents.contains { $0.event == "upload_document_successfully" })
     }
 
     func test_sendEventFailToUploadDocument_logsCorrectEvent() {
+        // Given
+        // When
         interactor.sendEventFailToUploadDocument()
+
+        // Then
         XCTAssertTrue(mockLogger.loggedEvents.contains { $0.event == "fail_to_upload_document" })
     }
 }
+
