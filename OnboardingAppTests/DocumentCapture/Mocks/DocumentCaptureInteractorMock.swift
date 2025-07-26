@@ -1,7 +1,7 @@
 import UIKit
 @testable import OnboardingApp
 
-final class MockDocumentCaptureInteractor: DocumentCaptureInteractorProtocol {
+final class DocumentCaptureInteractorMock: DocumentCaptureInteractorProtocol {
 
     var fetchSavedSelectionCalled = false
     var uploadDocumentCalled = false

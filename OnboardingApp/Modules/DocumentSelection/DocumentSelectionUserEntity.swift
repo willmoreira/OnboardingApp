@@ -1,6 +1,6 @@
 import Foundation
 
-struct DocumentSelectionUserEntity: Codable, Equatable {
+public struct DocumentSelectionUserEntity: Codable, Equatable {
 
     public let name: String
     public let iconName: String

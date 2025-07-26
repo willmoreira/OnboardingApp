@@ -4,15 +4,15 @@ import XCTest
 final class DocumentCapturePresenterTests: XCTestCase {
 
     private var presenter: DocumentCapturePresenter!
-    private var mockView: MockDocumentCaptureView!
-    private var mockInteractor: MockDocumentCaptureInteractor!
-    private var mockRouter: MockDocumentCaptureRouter!
+    private var mockView: DocumentCaptureViewMock!
+    private var mockInteractor: DocumentCaptureInteractorMock!
+    private var mockRouter: DocumentCaptureRouterMock!
 
     override func setUp() {
         super.setUp()
-        mockView = MockDocumentCaptureView()
-        mockInteractor = MockDocumentCaptureInteractor()
-        mockRouter = MockDocumentCaptureRouter()
+        mockView = DocumentCaptureViewMock()
+        mockInteractor = DocumentCaptureInteractorMock()
+        mockRouter = DocumentCaptureRouterMock()
         presenter = DocumentCapturePresenter(view: mockView, interactor: mockInteractor, router: mockRouter)
     }
 
@@ -89,4 +89,3 @@ final class DocumentCapturePresenterTests: XCTestCase {
         XCTAssertEqual(mockView.displayedDocumentName, "CNH")
     }
 }
-

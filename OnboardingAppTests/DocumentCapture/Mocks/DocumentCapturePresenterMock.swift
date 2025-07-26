@@ -1,7 +1,7 @@
 import Foundation
 @testable import OnboardingApp
 
-final class MockDocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
+final class DocumentCapturePresenterMock: DocumentCaptureInteractorOutputProtocol {
 
     var didUploadSuccessfullyCalled = false
     var didFailToUploadCalled = false

@@ -3,14 +3,14 @@ import XCTest
 
 final class CountrySelectionInteractorTests: XCTestCase {
 
-    private var mockPresenter: MockCountrySelectionPresenter!
-    private var mockLogger: MockEventLogger!
+    private var mockPresenter: CountrySelectionPresenterMock!
+    private var mockLogger: EventLoggerMock!
     private var interactor: CountrySelectionInteractor!
 
     override func setUp() {
         super.setUp()
-        mockPresenter = MockCountrySelectionPresenter()
-        mockLogger = MockEventLogger()
+        mockPresenter = CountrySelectionPresenterMock()
+        mockLogger = EventLoggerMock()
         interactor = CountrySelectionInteractor(eventLogger: mockLogger)
         interactor.presenter = mockPresenter
     }

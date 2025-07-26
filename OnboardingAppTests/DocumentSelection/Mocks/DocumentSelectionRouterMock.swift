@@ -1,6 +1,7 @@
 @testable import OnboardingApp
 
-final class MockDocumentSelectionRouter: DocumentSelectionRouterProtocol {
+final class DocumentSelectionRouterMock: DocumentSelectionRouterProtocol {
+
     var navigated = false
     func navigateToDocumentCapture() {
         navigated = true

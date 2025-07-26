@@ -1,7 +1,7 @@
 import Foundation
 @testable import OnboardingApp
 
-final class MockDocumentCaptureRouter: DocumentCaptureRouterProtocol {
+final class DocumentCaptureRouterMock: DocumentCaptureRouterProtocol {
     var navigateCalled = false
 
     func navigateToNextStep() {

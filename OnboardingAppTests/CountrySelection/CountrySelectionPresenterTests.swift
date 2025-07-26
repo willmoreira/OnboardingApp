@@ -3,16 +3,16 @@ import XCTest
 
 final class CountrySelectionPresenterTests: XCTestCase {
 
-    private var mockView: MockCountrySelectionView!
-    private var mockInteractor: MockCountrySelectionInteractor!
-    private var mockRouter: MockCountrySelectionRouter!
+    private var mockView: CountrySelectionViewMock!
+    private var mockInteractor: CountrySelectionInteractorMock!
+    private var mockRouter: CountrySelectionRouterMock!
     private var presenter: CountrySelectionPresenter!
 
     override func setUp() {
         super.setUp()
-        mockView = MockCountrySelectionView()
-        mockInteractor = MockCountrySelectionInteractor()
-        mockRouter = MockCountrySelectionRouter()
+        mockView = CountrySelectionViewMock()
+        mockInteractor = CountrySelectionInteractorMock()
+        mockRouter = CountrySelectionRouterMock()
         presenter = CountrySelectionPresenter(view: mockView,
                                               interactor: mockInteractor,
                                               router: mockRouter)
@@ -61,4 +61,3 @@ final class CountrySelectionPresenterTests: XCTestCase {
         XCTAssertEqual(mockRouter.selectedCountry, country)
     }
 }
-

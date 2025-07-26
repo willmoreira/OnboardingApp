@@ -1,7 +1,7 @@
 import UIKit
 @testable import OnboardingApp
 
-final class MockDocumentCaptureView: DocumentCaptureViewProtocol {
+final class DocumentCaptureViewMock: DocumentCaptureViewProtocol {
 
     var showErrorMessageCalled = false
     var showSuccessMessageCalled = false

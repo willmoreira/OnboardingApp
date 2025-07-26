@@ -1,6 +1,6 @@
 import Foundation
 
-struct CountrySelectionEntity: Codable, Equatable {
+public struct CountrySelectionEntity: Codable, Equatable {
 
     public let name: String
     public let flagImageName: String

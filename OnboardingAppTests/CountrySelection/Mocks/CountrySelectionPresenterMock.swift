@@ -1,7 +1,7 @@
 import Foundation
 @testable import OnboardingApp
 
-final class MockCountrySelectionPresenter: CountrySelectionInteractorOutputProtocol {
+final class CountrySelectionPresenterMock: CountrySelectionInteractorOutputProtocol {
     private(set) var fetchedCountries: [CountrySelectionEntity] = []
 
     func didFetchCountries(_ countries: [CountrySelectionEntity]) {

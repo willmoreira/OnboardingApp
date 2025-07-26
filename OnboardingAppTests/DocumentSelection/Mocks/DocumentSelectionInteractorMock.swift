@@ -1,8 +1,8 @@
 import Foundation
 @testable import OnboardingApp
 
-final class MockDocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
-    
+final class DocumentSelectionInteractorMock: DocumentSelectionInteractorProtocol {
+
     var fetchDocumentsCalled = false
     var sendEventCalled = false
     var sentCountry: CountrySelectionEntity?
@@ -19,7 +19,7 @@ final class MockDocumentSelectionInteractor: DocumentSelectionInteractorProtocol
         sentCountry = country
         sentDocument = document
     }
-    
+
     func saveSelectedCountryAndDocument(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
         savedCountry = country
         savedDocument = document

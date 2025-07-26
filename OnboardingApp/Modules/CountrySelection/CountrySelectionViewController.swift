@@ -36,7 +36,7 @@ final class CountrySelectionViewController: UIViewController {
         button.isEnabled = false
         button.alpha = 0.3
         button.isAccessibilityElement = true
-        button.accessibilityLabel = "Avançar para próxima etapa"
+        button.accessibilityLabel = "Avançar"
         button.accessibilityHint = "Selecione um país para ativar este botão"
         button.accessibilityTraits = .button
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)

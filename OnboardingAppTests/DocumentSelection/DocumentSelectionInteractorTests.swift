@@ -4,14 +4,14 @@ import UIKit
 
 final class DocumentSelectionInteractorTests: XCTestCase {
 
-    private var mockPresenter: MockDocumentSelectionPresenter!
-    private var mockLogger: MockEventLogger!
+    private var mockPresenter: DocumentSelectionPresenterMock!
+    private var mockLogger: EventLoggerMock!
     private var interactor: DocumentSelectionInteractor!
 
     override func setUp() {
         super.setUp()
-        mockPresenter = MockDocumentSelectionPresenter()
-        mockLogger = MockEventLogger()
+        mockPresenter = DocumentSelectionPresenterMock()
+        mockLogger = EventLoggerMock()
         let country = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
         interactor = DocumentSelectionInteractor(country: country, eventLogger: mockLogger)
         interactor.presenter = mockPresenter
@@ -102,4 +102,3 @@ final class DocumentSelectionInteractorTests: XCTestCase {
         XCTAssertEqual(mockPresenter.receivedDocuments[0].name, "Passport")
     }
 }
-

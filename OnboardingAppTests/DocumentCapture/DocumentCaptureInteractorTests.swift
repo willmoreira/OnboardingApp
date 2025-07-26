@@ -4,15 +4,15 @@ import XCTest
 final class DocumentCaptureInteractorTests: XCTestCase {
 
     private var interactor: DocumentCaptureInteractor!
-    private var mockPresenter: MockDocumentCapturePresenter!
-    private var mockUploadService: MockUploadService!
-    private var mockLogger: MockEventLogger!
+    private var mockPresenter: DocumentCapturePresenterMock!
+    private var mockUploadService: UploadServiceMock!
+    private var mockLogger: EventLoggerMock!
 
     override func setUp() {
         super.setUp()
-        mockPresenter = MockDocumentCapturePresenter()
-        mockUploadService = MockUploadService()
-        mockLogger = MockEventLogger()
+        mockPresenter = DocumentCapturePresenterMock()
+        mockUploadService = UploadServiceMock()
+        mockLogger = EventLoggerMock()
         interactor = DocumentCaptureInteractor(uploadService: mockUploadService, eventLogger: mockLogger)
         interactor.presenter = mockPresenter
     }
@@ -81,4 +81,3 @@ final class DocumentCaptureInteractorTests: XCTestCase {
         XCTAssertTrue(mockLogger.loggedEvents.contains { $0.event == "fail_to_upload_document" })
     }
 }
-

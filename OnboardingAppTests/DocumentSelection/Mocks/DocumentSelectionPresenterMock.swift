@@ -1,7 +1,8 @@
 import Foundation
 @testable import OnboardingApp
 
-final class MockDocumentSelectionPresenter: DocumentSelectionInteractorOutputProtocol {
+final class DocumentSelectionPresenterMock: DocumentSelectionInteractorOutputProtocol {
+
     var receivedDocuments: [DocumentSelectionUserEntity] = []
     var receivedCountry: CountrySelectionEntity?
 

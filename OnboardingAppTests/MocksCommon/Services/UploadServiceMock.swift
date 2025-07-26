@@ -1,7 +1,7 @@
 import UIKit
 @testable import OnboardingApp
 
-final class MockUploadService: UploadServiceProtocol {
+final class UploadServiceMock: UploadServiceProtocol {
 
     var result: Result<Void, Error>?
     func upload(image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {

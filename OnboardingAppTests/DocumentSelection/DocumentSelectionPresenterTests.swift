@@ -3,16 +3,16 @@ import XCTest
 
 final class DocumentSelectionPresenterTests: XCTestCase {
 
-    private var mockView: MockDocumentSelectionView!
-    private var mockInteractor: MockDocumentSelectionInteractor!
-    private var mockRouter: MockDocumentSelectionRouter!
+    private var mockView: DocumentSelectionViewMock!
+    private var mockInteractor: DocumentSelectionInteractorMock!
+    private var mockRouter: DocumentSelectionRouterMock!
     private var presenter: DocumentSelectionPresenter!
 
     override func setUp() {
         super.setUp()
-        mockView = MockDocumentSelectionView()
-        mockInteractor = MockDocumentSelectionInteractor()
-        mockRouter = MockDocumentSelectionRouter()
+        mockView = DocumentSelectionViewMock()
+        mockInteractor = DocumentSelectionInteractorMock()
+        mockRouter = DocumentSelectionRouterMock()
         presenter = DocumentSelectionPresenter(view: mockView,
                                                interactor: mockInteractor,
                                                router: mockRouter)
