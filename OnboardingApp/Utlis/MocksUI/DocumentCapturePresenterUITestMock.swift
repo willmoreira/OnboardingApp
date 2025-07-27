@@ -2,19 +2,13 @@ import Foundation
 import UIKit
 
 final class DocumentCapturePresenterUITestMock: DocumentCapturePresenterProtocol {
-
+    
     weak var view: DocumentCaptureViewProtocol?
 
     func viewDidLoad() {
         let dummyCountry = CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "br")
         let dummyDocument = DocumentSelectionEntity.UserEntity(name: "CNH", iconName: "car.fill")
         let dummyBirthDate = Calendar.current.date(byAdding: .year, value: -25, to: Date()) ?? Date()
-
-        let userEntity = UserSelectionEntity.UserEntity(
-            country: dummyCountry,
-            document: dummyDocument,
-            birthDate: dummyBirthDate
-        )
 
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -33,4 +27,5 @@ final class DocumentCapturePresenterUITestMock: DocumentCapturePresenterProtocol
     func didTapCapture() {}
     func didTapSend() {}
     func didRetrieveSelection(_ selection: UserSelectionEntity) {}
+    func didConfirmSuccess() {}
 }

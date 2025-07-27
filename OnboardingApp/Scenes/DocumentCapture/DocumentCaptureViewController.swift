@@ -253,7 +253,9 @@ extension DocumentCaptureViewController: DocumentCaptureViewProtocol {
 
     func showSuccessMessage() {
         let alert = UIAlertController(title: "Sucesso", message: "Documento enviado com sucesso!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            self?.presenter.didConfirmSuccess()
+        })
         present(alert, animated: true)
 
         UIAccessibility.post(notification: .announcement, argument: "Documento enviado com sucesso")

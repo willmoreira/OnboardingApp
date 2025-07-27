@@ -12,6 +12,7 @@ protocol DocumentCapturePresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapSend()
     func didTapCapture()
+    func didConfirmSuccess()
 }
 
 protocol DocumentCaptureInteractorProtocol: AnyObject {
@@ -28,5 +29,5 @@ protocol DocumentCaptureInteractorOutputProtocol: AnyObject {
 }
 
 protocol DocumentCaptureRouterProtocol: AnyObject {
-    // futuro: navegar para próxima tela, se quiser
+    func restartFlow()
 }

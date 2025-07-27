@@ -58,6 +58,10 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
             view?.showSuccessMessage()
         }
     }
+    
+    func didConfirmSuccess() {
+        router.restartFlow()
+    }
 }
 
 // MARK: - DocumentCaptureInteractorOutputProtocol
@@ -83,14 +87,14 @@ extension DocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
     }
 
     func didUploadDocumentSuccessfully() {
-        view?.showLoading(false)
         interactor.sendEventUploadDocumentSuccessfully()
+        view?.showLoading(false)
         view?.showSuccessMessage()
     }
 
     func didFailToUploadDocument() {
-        view?.showLoading(false)
         interactor.sendEventFailToUploadDocument()
+        view?.showLoading(false)
         view?.showErrorMessage()
     }
 }
