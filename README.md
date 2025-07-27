@@ -1,4 +1,4 @@
-# 📱 OnboardingApp – Desafio Técnico iOS Sênior
+# 📱 OnboardingApp – Desafio Técnico iOS
 
 Este projeto simula o início de um fluxo de verificação de identidade, com seleção de país, tipo de documento e uma etapa mock de captura de imagem, inspirado em soluções comuns de fintechs.
 
