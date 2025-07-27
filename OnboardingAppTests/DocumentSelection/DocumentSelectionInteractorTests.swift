@@ -63,5 +63,34 @@ final class DocumentSelectionInteractorTests: XCTestCase {
 
         XCTAssertEqual(savedDocument?.name, "Passport")
     }
+    
+    func test_fetchDocuments_forUnitedStates_returnsCorrectDocuments() {
+        // Given
+        let usaCountry = CountrySelectionEntity.UserEntity(name: "Estados Unidos", flagImageName: "us")
+        let interactor = DocumentSelectionInteractor(country: usaCountry, eventLogger: mockLogger)
+        interactor.presenter = mockPresenter
+
+        // When
+        interactor.fetchDocuments()
+
+        // Then
+        XCTAssertEqual(mockPresenter.receivedDocuments.count, 2)
+        XCTAssertEqual(mockPresenter.receivedDocuments[0].name, "Driver License")
+        XCTAssertEqual(mockPresenter.receivedDocuments[1].name, "Passport")
+    }
+    
+    func test_fetchDocuments_forOtherCountry_returnsPassportOnly() {
+        // Given
+        let germany = CountrySelectionEntity.UserEntity(name: "Alemanha", flagImageName: "de")
+        let interactor = DocumentSelectionInteractor(country: germany, eventLogger: mockLogger)
+        interactor.presenter = mockPresenter
+
+        // When
+        interactor.fetchDocuments()
+
+        // Then
+        XCTAssertEqual(mockPresenter.receivedDocuments.count, 1)
+        XCTAssertEqual(mockPresenter.receivedDocuments[0].name, "Passport")
+    }
 }
 

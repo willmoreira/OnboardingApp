@@ -7,6 +7,7 @@ final class DocumentCaptureViewMock: DocumentCaptureViewProtocol {
     private(set) var showSuccessMessageCalled = false
     private(set) var showLoadingCalled = false
     private(set) var hideLoadingCalled = false
+    private(set) var showCapturedImageCalled = false
     private(set) var displayedCountryName: String?
     private(set) var displayedDocumentName: String?
     private(set) var displayBirthDateFormattedCalled = false
@@ -28,7 +29,7 @@ final class DocumentCaptureViewMock: DocumentCaptureViewProtocol {
     }
 
     func showCapturedImage(_ image: UIImage) {
-        // opcional
+        showCapturedImageCalled = true
     }
 
     func displayUserSelection(_ viewModel: UserSelectionEntity.ViewModel) {

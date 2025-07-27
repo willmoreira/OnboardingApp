@@ -11,7 +11,7 @@ final class DocumentCapturePresenter {
     // MARK: - Properties
 
     var capturedImage: UIImage?
-    private var document: DocumentSelectionEntity.UserEntity?
+    var document: DocumentSelectionEntity.UserEntity?
 
     // MARK: - Initialization
 
@@ -58,7 +58,7 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
             view?.showSuccessMessage()
         }
     }
-    
+
     func didConfirmSuccess() {
         router.restartFlow()
     }

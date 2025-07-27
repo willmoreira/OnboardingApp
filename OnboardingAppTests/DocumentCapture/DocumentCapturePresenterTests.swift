@@ -98,4 +98,25 @@ final class DocumentCapturePresenterTests: XCTestCase {
         XCTAssertEqual(mockView.displayedDocumentName, "CNH")
         XCTAssertTrue(mockView.displayBirthDateFormattedCalled)
     }
+    
+    func test_didConfirmSuccess_callsRouterRestartFlow() {
+        // Given
+        // When
+        presenter.didConfirmSuccess()
+
+        // Then
+        XCTAssertTrue(mockRouter.restartFlowCalled)
+    }
+    
+    func test_didTapCapture_whenImageExists_shouldShowCapturedImage() {
+        // Given
+        let document = DocumentSelectionEntity.UserEntity(name: "CNH", iconName: "car.fill")
+        presenter.document = document
+
+        // When
+        presenter.didTapCapture()
+
+        // Then
+        XCTAssertTrue(mockView.showCapturedImageCalled)
+    }
 }
