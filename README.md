@@ -34,7 +34,7 @@ Protocolos e injeção de dependência para desacoplamento e testabilidade
 
 ## 📂 Organização do Projeto
 
-<img width="276" height="640" alt="img" src="https://github.com/user-attachments/assets/2f9b1547-d907-47a1-8394-46080c214f25" />
+<img width="543" height="646" alt="img3" src="https://github.com/user-attachments/assets/dc247041-ca2b-4b92-8890-1b0da30473e2" />
 
 ## 📲 Requisitos
 
