@@ -13,23 +13,32 @@ Este projeto simula o início de um fluxo de verificação de identidade, com se
 
 
 ## 🧱 Arquitetura
+VIPER (View, Interactor, Presenter, Entity, Router)
+Estrutura modular e testável, com responsabilidades bem definidas:
 
-- **VIP (View + Interactor + Presenter)**
-- **Coordinator** para controle de navegação
-- Separação clara entre camadas, com uso de protocolos e injeção de dependência
+View: exibe a interface e responde às ações do usuário
+
+Interactor: lógica de negócio e regras da aplicação
+
+Presenter: formata dados para exibição e comunica a lógica com a view
+
+Entity: modelos usados pelas regras de negócio
+
+Router: responsável pela navegação entre as telas
+
+Coordinator para controle centralizado do fluxo de navegação
+
+Protocolos e injeção de dependência para desacoplamento e testabilidade
 
 
 ## 📂 Organização do Projeto
 
 <img width="276" height="640" alt="img" src="https://github.com/user-attachments/assets/2f9b1547-d907-47a1-8394-46080c214f25" />
 
-
-
-
 ## 📲 Requisitos
 
 - **Xcode**: 16.4 (16F6)
-- **iOS mínimo**: 15.0
+- **iOS mínimo**: 18.0
 - **Dependências**: Nenhuma externa
 - **Dispositivo físico ou simulador**: ambos funcionam
 
@@ -48,12 +57,17 @@ open OnboardingApp.xcodeproj
 
 ## ✅ MVP Entregue
 
-- Seleção de país com lista mock
-- Seleção de documento com base no país
-- Tela de captura mockada com imagem simulada
-- Armazenamento local usando UserDefaults
-- Arquitetura VIP com Coordinator
-- Testes unitários: Interactor + Presenter
+✅ Seleção de país com lista mockada
+
+✅ Seleção de documento com base no país
+
+✅ Tela de captura mockada com imagem simulada
+
+✅ Armazenamento local com UserDefaults
+
+✅ Arquitetura VIPER com navegação via Coordinator
+
+✅ Testes unitários cobrindo Interactor e Presenter
 
 ## ✨ Diferenciais implementados (Plus)
 
@@ -84,7 +98,7 @@ Rodar testes:
 ⤷ Optei por priorizar clareza arquitetural e qualidade das entregas core.
 
 ❌ SwiftUI
-⤷ Como o projeto foi estruturado com UIKit + VIP, a inclusão exigiria mudanças amplas de arquitetura em tempo limitado.
+⤷ A inclusão demandaria mudança completa na arquitetura (VIPER + UIKit).
 
 ## 📸 Screenshots
 
