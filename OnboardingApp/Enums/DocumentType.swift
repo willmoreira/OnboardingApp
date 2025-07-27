@@ -14,7 +14,7 @@ enum DocumentType: String {
         }
     }
 
-    init(from document: DocumentSelectionUserEntity?) {
+    init(from document: DocumentSelectionEntity.UserEntity?) {
         self = DocumentType(rawValue: document?.name ?? "") ?? .passport
     }
 }

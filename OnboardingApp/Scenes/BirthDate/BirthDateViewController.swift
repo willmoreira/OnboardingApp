@@ -23,6 +23,7 @@ final class BirthDateViewController: UIViewController {
         picker.datePickerMode = .date
         picker.maximumDate = Date()
         picker.preferredDatePickerStyle = .wheels
+        picker.locale = Locale(identifier: "pt_BR")
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
 

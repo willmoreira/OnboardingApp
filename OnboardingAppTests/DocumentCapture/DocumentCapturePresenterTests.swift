@@ -45,6 +45,7 @@ final class DocumentCapturePresenterTests: XCTestCase {
     func test_didTapSend_withImage_uploadsDocument() {
         // Given
         presenter.didTapCapture()
+        presenter.capturedImage = UIImage()
 
         // When
         presenter.didTapSend()
@@ -78,14 +79,43 @@ final class DocumentCapturePresenterTests: XCTestCase {
 
     func test_didRetrieveSelection_updatesView() {
         // Given
-        let country = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
-        let document = DocumentSelectionUserEntity(name: "CNH", iconName: "car.fill")
+        let dummyCountry = CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "br")
+        let dummyDocument = DocumentSelectionEntity.UserEntity(name: "CNH", iconName: "car.fill")
+        let dummyBirthDate = Calendar.current.date(byAdding: .year, value: -20, to: Date())!
+
+        let response = UserSelectionEntity.Response(selection: .init(
+            country: dummyCountry,
+            document: dummyDocument,
+            birthDate: dummyBirthDate
+        ))
 
         // When
-        presenter.didRetrieveSelection(country: country, document: document)
+        presenter.didRetrieveSelection(response)
 
         // Then
         XCTAssertEqual(mockView.displayedCountryName, "Brasil")
         XCTAssertEqual(mockView.displayedDocumentName, "CNH")
+        XCTAssertTrue(mockView.displayBirthDateFormattedCalled)
+    }
+
+    func test_didConfirmSuccess_callsRouterRestartFlow() {
+        // Given
+        // When
+        presenter.didConfirmSuccess()
+
+        // Then
+        XCTAssertTrue(mockRouter.restartFlowCalled)
+    }
+
+    func test_didTapCapture_whenImageExists_shouldShowCapturedImage() {
+        // Given
+        let document = DocumentSelectionEntity.UserEntity(name: "CNH", iconName: "car.fill")
+        presenter.document = document
+
+        // When
+        presenter.didTapCapture()
+
+        // Then
+        XCTAssertTrue(mockView.showCapturedImageCalled)
     }
 }

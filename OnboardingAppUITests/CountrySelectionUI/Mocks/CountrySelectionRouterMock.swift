@@ -9,7 +9,7 @@ final class CountrySelectionRouterMock: CountrySelectionRouterProtocol {
         self.viewController = viewController
     }
 
-    func navigateToDocumentSelection(with country: CountrySelectionEntity) {
+    func navigateToDocumentSelection(with country: CountrySelectionEntity.UserEntity) {
         navigateToDocumentSelectionCalled = true
     }
 }

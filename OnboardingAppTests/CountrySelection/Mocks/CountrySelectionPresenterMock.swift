@@ -3,9 +3,9 @@ import Foundation
 
 final class CountrySelectionPresenterMock: CountrySelectionInteractorOutputProtocol {
 
-    private(set) var fetchedCountries: [CountrySelectionEntity] = []
+    private(set) var fetchedCountries: [CountrySelectionEntity.UserEntity] = []
 
-    func didFetchCountries(_ countries: [CountrySelectionEntity]) {
-        fetchedCountries = countries
+    func didFetchCountries(_ response: CountrySelectionEntity.Response) {
+        fetchedCountries = response.countries
     }
 }

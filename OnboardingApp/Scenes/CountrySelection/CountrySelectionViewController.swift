@@ -1,13 +1,13 @@
 import UIKit
 
-final class DocumentSelectionViewController: UIViewController {
+final class CountrySelectionViewController: UIViewController {
 
     // MARK: - Properties
 
-    var presenter: DocumentSelectionPresenterProtocol!
+    var presenter: CountrySelectionPresenterProtocol!
 
-    private var documents: [DocumentSelectionUserEntity] = []
-    private var selectedDocument: DocumentSelectionUserEntity?
+    private var countries: [CountrySelectionEntity.UserEntity] = []
+    private var selectedCountry: CountrySelectionEntity.UserEntity?
     private var selectedIndexPath: IndexPath?
 
     // MARK: - UI Components
@@ -16,7 +16,7 @@ final class DocumentSelectionViewController: UIViewController {
         let table = UITableView()
         table.separatorStyle = .none
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        table.register(IconTitleTableViewCell.self, forCellReuseIdentifier: "IconTitleCell")
         table.dataSource = self
         table.delegate = self
         return table
@@ -35,12 +35,11 @@ final class DocumentSelectionViewController: UIViewController {
         button.tintColor = .systemGreen
         button.isEnabled = false
         button.alpha = 0.3
-        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-
         button.isAccessibilityElement = true
-        button.accessibilityLabel = "Botão Avançar"
-        button.accessibilityHint = "Avança para o próximo passo após selecionar um documento"
-
+        button.accessibilityLabel = "Avançar"
+        button.accessibilityHint = "Selecione um país para ativar este botão"
+        button.accessibilityTraits = .button
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -48,26 +47,24 @@ final class DocumentSelectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Selecione o Documento"
-        view.backgroundColor = .systemBackground
         setupLayout()
         presenter.viewDidLoad()
-
-        UIAccessibility.post(notification: .screenChanged, argument: title)
     }
 
     // MARK: - Actions
 
     @objc private func nextButtonTapped() {
-        guard let document = selectedDocument else { return }
-        presenter.didTapNext(with: document)
+        guard let country = selectedCountry else { return }
+        let request = CountrySelectionEntity.Request(entity: country)
+        presenter.didTapNext(with: request)
     }
 
     // MARK: - Layout
 
     private func setupLayout() {
-        tableView.register(IconTitleTableViewCell.self, forCellReuseIdentifier: "IconTitleCell")
-
+        title = "Selecione o País"
+        UIAccessibility.post(notification: .screenChanged, argument: self.navigationItem.titleView ?? self)
+        view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         view.addSubview(nextButton)
         tableView.backgroundColor = .white
@@ -86,12 +83,12 @@ final class DocumentSelectionViewController: UIViewController {
     }
 }
 
-// MARK: - DocumentSelectionViewProtocol
+// MARK: - CountrySelectionViewProtocol
 
-extension DocumentSelectionViewController: DocumentSelectionViewProtocol {
+extension CountrySelectionViewController: CountrySelectionViewProtocol {
 
-    func showDocuments(_ documents: [DocumentSelectionUserEntity]) {
-        self.documents = documents
+    func showCountries(_ viewModel: CountrySelectionEntity.ViewModel) {
+        self.countries = viewModel.countries
         tableView.reloadData()
 
         DispatchQueue.main.async {
@@ -102,38 +99,33 @@ extension DocumentSelectionViewController: DocumentSelectionViewProtocol {
 
 // MARK: - UITableViewDataSource & UITableViewDelegate
 
-extension DocumentSelectionViewController: UITableViewDataSource, UITableViewDelegate {
-
+extension CountrySelectionViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return documents.count
+        return countries.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let doc = documents[indexPath.row]
+        let country = countries[indexPath.row]
         let isSelected = (indexPath == selectedIndexPath)
 
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "IconTitleCell",
-            for: indexPath) as? IconTitleTableViewCell else {
+            for: indexPath
+        ) as? IconTitleTableViewCell else {
             return UITableViewCell()
         }
 
-        cell.configure(title: doc.name, iconName: doc.iconName, isSelected: isSelected, iconIsSystem: true)
+        cell.configure(title: country.name, iconName: country.flagImageName, isSelected: isSelected, iconIsSystem: false)
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let previous = selectedIndexPath {
-            tableView.cellForRow(at: previous)?.accessoryType = .none
-        }
-
         selectedIndexPath = indexPath
-        selectedDocument = documents[indexPath.row]
+        selectedCountry = countries[indexPath.row]
         nextButton.isEnabled = true
         nextButton.alpha = 1.0
+        nextButton.accessibilityHint = "Avança para a próxima etapa"
         tableView.reloadData()
-
-        let selectedDocName = selectedDocument?.name ?? "Documento"
-        UIAccessibility.post(notification: .announcement, argument: "\(selectedDocName) selecionado")
+        UIAccessibility.post(notification: .layoutChanged, argument: nextButton)
     }
 }

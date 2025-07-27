@@ -5,23 +5,22 @@ final class DocumentSelectionInteractorMock: DocumentSelectionInteractorProtocol
 
     var fetchDocumentsCalled = false
     var sendEventCalled = false
-    var sentCountry: CountrySelectionEntity?
-    var sentDocument: DocumentSelectionUserEntity?
-    var savedCountry: CountrySelectionEntity?
-    var savedDocument: DocumentSelectionUserEntity?
+    var saveSelectedCalled = false
+
+    var sentRequestForEvent: DocumentSelectionEntity.Request?
+    var sentRequestForSave: DocumentSelectionEntity.Request?
 
     func fetchDocuments() {
         fetchDocumentsCalled = true
     }
 
-    func sendEvent(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
+    func sendEvent(request: DocumentSelectionEntity.Request) {
         sendEventCalled = true
-        sentCountry = country
-        sentDocument = document
+        sentRequestForEvent = request
     }
 
-    func saveSelectedCountryAndDocument(country: CountrySelectionEntity, document: DocumentSelectionUserEntity) {
-        savedCountry = country
-        savedDocument = document
+    func saveSelectedCountryAndDocument(request: DocumentSelectionEntity.Request) {
+        saveSelectedCalled = true
+        sentRequestForSave = request
     }
 }

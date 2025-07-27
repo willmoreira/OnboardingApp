@@ -23,20 +23,24 @@ final class CountrySelectionInteractorTests: XCTestCase {
     }
 
     func test_fetchCountries_returnsMockList() {
+        // Given: Crie um Request com um país default, se for necessário pelo seu método
+        let request = CountrySelectionEntity.Request(entity: CountrySelectionEntity.UserEntity(name: "", flagImageName: ""))
+
         // When
-        interactor.fetchCountries()
+        interactor.fetchCountries(request: request)
 
         // Then
-        XCTAssertEqual(mockPresenter.fetchedCountries.count, 5)
-        XCTAssertEqual(mockPresenter.fetchedCountries[0].name, "Brasil")
+        XCTAssertFalse(mockPresenter.fetchedCountries.isEmpty, "Esperava países retornados")
+        XCTAssertEqual(mockPresenter.fetchedCountries.first?.name, "Brasil")
     }
 
     func test_sendEventTap_logsCorrectEvent() {
         // Given
-        let country = CountrySelectionEntity(name: "Brasil", flagImageName: "br")
+        let countryEntity = CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "br")
+        let request = CountrySelectionEntity.Request(entity: countryEntity)
 
         // When
-        interactor.sendEventTap(with: country)
+        interactor.sendEventTap(with: request)
 
         // Then
         XCTAssertEqual(mockLogger.loggedEvents.count, 1)

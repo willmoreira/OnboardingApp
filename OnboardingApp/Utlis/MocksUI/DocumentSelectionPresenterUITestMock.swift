@@ -7,13 +7,13 @@ public final class DocumentSelectionPresenterUITestMock: DocumentSelectionPresen
 
     func viewDidLoad() {
         let docs = [
-            DocumentSelectionUserEntity(name: "RG", iconName: "doc.text"),
-            DocumentSelectionUserEntity(name: "CNH", iconName: "car.fill")
+            DocumentSelectionEntity.UserEntity(name: "RG", iconName: "doc.text"),
+            DocumentSelectionEntity.UserEntity(name: "CNH", iconName: "car.fill")
         ]
-        view?.showDocuments(docs)
+
+        let viewModel = DocumentSelectionEntity.ViewModel(documents: docs)
+        view?.showDocuments(viewModel)
     }
 
-    func didTapNext(with document: DocumentSelectionUserEntity) {
-        // pode simular navegação ou log
-    }
+    func didTapNext(with document: DocumentSelectionEntity.UserEntity) {}
 }

@@ -253,7 +253,9 @@ extension DocumentCaptureViewController: DocumentCaptureViewProtocol {
 
     func showSuccessMessage() {
         let alert = UIAlertController(title: "Sucesso", message: "Documento enviado com sucesso!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            self?.presenter.didConfirmSuccess()
+        })
         present(alert, animated: true)
 
         UIAccessibility.post(notification: .announcement, argument: "Documento enviado com sucesso")
@@ -267,24 +269,13 @@ extension DocumentCaptureViewController: DocumentCaptureViewProtocol {
         UIAccessibility.post(notification: .announcement, argument: "Erro ao carregar a imagem")
     }
 
-    func displayUserSelection(_ selection: UserSelectionEntity) {
-        let countryText = "País: \(selection.country.name)"
-        let documentText = "Documento: \(selection.document.name)"
+    func displayUserSelection(_ viewModel: UserSelectionEntity.ViewModel) {
+        countryLabel.text = "País: \(viewModel.countryName)"
+        documentLabel.text = "Documento: \(viewModel.documentName)"
+        birthDateLabel.text = "Data de nascimento: \(viewModel.birthDateFormatted)"
 
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
-        formatter.locale = Locale(identifier: "pt_BR")
-
-        let birthDateFormatted = formatter.string(from: selection.birthDate)
-        let birthDateText = "Data de nascimento: \(birthDateFormatted)"
-
-        countryLabel.text = countryText
-        documentLabel.text = documentText
-        birthDateLabel.text = birthDateText
-
-        countryLabel.accessibilityValue = countryText
-        documentLabel.accessibilityValue = documentText
-        birthDateLabel.accessibilityValue = birthDateText
+        countryLabel.accessibilityValue = countryLabel.text
+        documentLabel.accessibilityValue = documentLabel.text
+        birthDateLabel.accessibilityValue = birthDateLabel.text
     }
 }

@@ -14,10 +14,10 @@ final class AppCoordinator: Coordinator {
 
     func start() {
         let module = CountrySelectionRouter.createModule(coordinator: self)
-        navigationController.pushViewController(module, animated: true)
+        navigationController.setViewControllers([module], animated: true)
     }
 
-    func goToDocumentSelection(with country: CountrySelectionEntity) {
+    func goToDocumentSelection(with country: CountrySelectionEntity.UserEntity) {
         setCustomBackButton()
         let module = DocumentSelectionRouter.createModule(coordinator: self, country: country)
         navigationController.pushViewController(module, animated: true)

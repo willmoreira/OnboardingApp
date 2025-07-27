@@ -25,5 +25,8 @@ final class DocumentCaptureRouter {
 }
 
 extension DocumentCaptureRouter: DocumentCaptureRouterProtocol {
-    // TODO: funções de navegação futura
+
+    func restartFlow() {
+        coordinator?.start()
+    }
 }
