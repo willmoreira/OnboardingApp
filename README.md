@@ -1,15 +1,16 @@
 # 📱 OnboardingApp – Desafio Técnico iOS
 
-Este projeto simula o início de um fluxo de verificação de identidade, com seleção de país, tipo de documento e uma etapa mock de captura de imagem, inspirado em soluções comuns de fintechs.
+Este projeto simula o início de um fluxo de verificação de identidade, com seleção de país, tipo de documento, data de nascimento e etapa mock de captura de imagem, inspirado em soluções comuns de fintechs.
 
 
 ## 🚀 Funcionalidades
 
-| Tela                      | Funcionalidade                                                                |
-|---------------------------|-------------------------------------------------------------------------------|
-| Seleção de País           | Lista mockada de países com bandeira e nome, permite seleção e avanço         |
-| Seleção de Documento      | Lista de documentos válidos por país, com ícone e seleção                     |
-| Captura de Documento      | Simulação de captura com imagem mock e opção de recaptura e envio             |
+| Tela                            | Funcionalidade                                                          |
+|---------------------------------|-------------------------------------------------------------------------|
+| Seleção de País                 | Lista mockada de países com bandeira e nome, permite seleção e avanço   |
+| Seleção de Documento            | Lista de documentos válidos por país, com ícone e seleção               |
+| Inserção de Data de Nascimento  | Inserção da data de nascimento com validação de idade minima e avanço   |
+| Captura de Documento            | Simulação de captura com imagem mock e opção de recaptura e envio       |
 
 
 ## 🧱 Arquitetura
@@ -67,6 +68,8 @@ open OnboardingApp.xcodeproj
 
 ✅ Arquitetura VIPER com navegação via Coordinator
 
+✅ Validação básica de dados
+
 ✅ Testes unitários cobrindo Interactor e Presenter
 
 ## ✨ Diferenciais implementados (Plus)
@@ -95,16 +98,17 @@ Rodar testes:
 
 ## ❌ Itens não entregues
 ❌ Modularização com Tuist/SPM
-⤷ Optei por priorizar clareza arquitetural e qualidade das entregas core.
+⤷ Optei por priorizar clareza arquitetural e foco nas entregas core.
 
 ❌ SwiftUI
-⤷ A inclusão demandaria mudança completa na arquitetura (VIPER + UIKit).
+⤷ A inclusão demandaria esforço na arquitetura (VIPER + UIKit) e falta de dominio na navegação para a implementação da tecnologia
 
 ## 📸 Screenshots
 
-<img width="263" height="570" alt="IMG_6581" src="https://github.com/user-attachments/assets/b82198b2-7008-484e-a0ee-5b8fade12af5" />
-<img width="263" height="570" alt="IMG_6582" src="https://github.com/user-attachments/assets/fb3b90f2-c851-44b0-a3fe-e5d4ce254b9b" />
-<img width="263" height="570" alt="IMG_6583" src="https://github.com/user-attachments/assets/a079de86-c6a9-40b0-8017-d84694ab00af" />
+<img width="210" height="456" alt="IMG_6581" src="https://github.com/user-attachments/assets/b82198b2-7008-484e-a0ee-5b8fade12af5" />
+<img width="210" height="456" alt="IMG_6582" src="https://github.com/user-attachments/assets/fb3b90f2-c851-44b0-a3fe-e5d4ce254b9b" />
+<img width="210" height="456" alt="IMG_6582" src="https://github.com/user-attachments/assets/3953c32b-7d7e-4fb8-b22e-061e6d2ff3a2" />
+<img width="210" height="456" alt="IMG_6583" src="https://github.com/user-attachments/assets/a079de86-c6a9-40b0-8017-d84694ab00af" />
 
 ## 📈 Analytics
 
