@@ -1,19 +1,36 @@
 import Foundation
 
-enum BirthDateEntity {
-    struct UserEntity: Codable, Equatable {
-        let date: Date
+public enum BirthDateEntity {
+
+    public struct UserEntity: Codable, Equatable {
+        public let date: Date
+
+        public init(date: Date) {
+            self.date = date
+        }
     }
 
-    struct Request {
-        let entity: UserEntity
+    public struct Request {
+        public let entity: UserEntity
+
+        public init(entity: UserEntity) {
+            self.entity = entity
+        }
     }
 
-    struct Response {
-        let isValid: Bool
+    public struct Response {
+        public let isValid: Bool
+
+        public init(isValid: Bool) {
+            self.isValid = isValid
+        }
     }
 
-    struct ViewModel {
-        let isValid: Bool
+    public struct ViewModel {
+        public let isValid: Bool
+
+        public init(isValid: Bool) {
+            self.isValid = isValid
+        }
     }
 }
