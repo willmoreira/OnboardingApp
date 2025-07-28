@@ -29,8 +29,8 @@ extension DocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
             ]
         case "Estados Unidos":
             documents = [
-                .init(name: "Driver License", iconName: "car.circle"),
-                .init(name: "Passport", iconName: "globe.americas.fill")
+                .init(name: "Driver License", iconName: "car.fill"),
+                .init(name: "Passport", iconName: "globe")
             ]
         default:
             documents = [

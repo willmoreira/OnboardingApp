@@ -35,7 +35,7 @@ final class DocumentSelectionInteractorTests: XCTestCase {
 
     func test_saveSelectedCountryAndDocument_savesToUserDefaults() {
         // Given
-        let document = DocumentSelectionEntity.UserEntity(name: "Passport", iconName: "globe.americas.fill")
+        let document = DocumentSelectionEntity.UserEntity(name: "Passport", iconName: "globe")
         let request = DocumentSelectionEntity.Request(entity: document)
         let countryKey = "selectedCountry"
         let documentKey = "selectedDocument"
