@@ -90,8 +90,11 @@ open OnboardingApp.xcodeproj
 ✅ Unitários
 Testes para Presenter e Interactor de todas as telas
 
+<img width="1302" height="665" alt="Captura de Tela 2025-07-27 às 23 48 23" src="https://github.com/user-attachments/assets/253440a3-e558-41b7-b2b4-d1ae97b5278b" />
+<img width="1300" height="758" alt="Captura de Tela 2025-07-27 às 23 48 45" src="https://github.com/user-attachments/assets/a439d694-d0d0-4df4-938b-9375dd6c623a" />
+
 ✅ UI Tests
-Testes automatizados para fluxo completo do usuário
+Testes automatizados para todas as telas
 
 Rodar testes:
 ⌘ + U (ou via Product > Test)
