@@ -115,13 +115,19 @@ Rodar testes:
 
 ## 📈 Analytics
 
-Eventos logados em cada etapa:
+Eventos mapeados em cada etapa:
 
-País selecionado
+Clicar no avançar - na tela de escolha do pais
 
-Documento selecionado
+Clicar no avançar - na tela de escolha do tipo do documento
 
-Captura de documento simulada
+Clicar no avançar - na tela de escolher data de nascimento
+
+Clicar no enviar - na tela de captura do documento
+
+Documento enviado com sucesso
+
+<img width="779" height="151" alt="Captura de Tela 2025-07-28 às 01 33 03" src="https://github.com/user-attachments/assets/225dff3c-c2ad-426f-8959-b2b84a347c8d" />
 
 Os eventos são enviados por uma classe mock que simula um sistema de log analitics.
 
