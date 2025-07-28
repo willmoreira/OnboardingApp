@@ -1,6 +1,7 @@
 import XCTest
 
 final class CountrySelectionViewControllerUITests: XCTestCase {
+    
     private var app: XCUIApplication!
 
     override func setUp() {

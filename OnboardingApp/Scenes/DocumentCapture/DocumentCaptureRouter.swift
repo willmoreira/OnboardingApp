@@ -12,9 +12,14 @@ final class DocumentCaptureRouter {
         let view = DocumentCaptureViewController()
         let uploadService = UploadService()
         let eventLogger = ConsoleEventLogger()
-        let interactor = DocumentCaptureInteractor(uploadService: uploadService, eventLogger: eventLogger)
+        let interactor = DocumentCaptureInteractor(uploadService: uploadService)
         let router = DocumentCaptureRouter()
-        let presenter = DocumentCapturePresenter(view: view, interactor: interactor, router: router)
+        let presenter = DocumentCapturePresenter(
+            view: view,
+            interactor: interactor,
+            router: router,
+            eventLogger: eventLogger
+        )
 
         view.presenter = presenter
         interactor.presenter = presenter

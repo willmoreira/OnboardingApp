@@ -7,13 +7,19 @@ final class DocumentCapturePresenterTests: XCTestCase {
     private var mockView: DocumentCaptureViewMock!
     private var mockInteractor: DocumentCaptureInteractorMock!
     private var mockRouter: DocumentCaptureRouterMock!
+    private var mockLogger: EventLoggerMock!
 
     override func setUp() {
         super.setUp()
         mockView = DocumentCaptureViewMock()
         mockInteractor = DocumentCaptureInteractorMock()
         mockRouter = DocumentCaptureRouterMock()
-        presenter = DocumentCapturePresenter(view: mockView, interactor: mockInteractor, router: mockRouter)
+        mockLogger = EventLoggerMock()
+        presenter = DocumentCapturePresenter(
+            view: mockView,
+            interactor: mockInteractor,
+            router: mockRouter,
+            eventLogger: mockLogger)
     }
 
     override func tearDown() {
@@ -21,6 +27,7 @@ final class DocumentCapturePresenterTests: XCTestCase {
         mockView = nil
         mockInteractor = nil
         mockRouter = nil
+        mockLogger = nil
         super.tearDown()
     }
 
@@ -62,7 +69,6 @@ final class DocumentCapturePresenterTests: XCTestCase {
 
         // Then
         XCTAssertTrue(mockView.hideLoadingCalled)
-        XCTAssertTrue(mockInteractor.sendEventUploadDocumentSuccessfullyCalled)
         XCTAssertTrue(mockView.showSuccessMessageCalled)
     }
 
@@ -73,7 +79,6 @@ final class DocumentCapturePresenterTests: XCTestCase {
 
         // Then
         XCTAssertTrue(mockView.hideLoadingCalled)
-        XCTAssertTrue(mockInteractor.sendEventFailToUploadDocumentCalled)
         XCTAssertTrue(mockView.showErrorMessageCalled)
     }
 

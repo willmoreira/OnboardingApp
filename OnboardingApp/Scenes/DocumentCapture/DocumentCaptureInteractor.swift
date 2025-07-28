@@ -6,13 +6,11 @@ final class DocumentCaptureInteractor {
 
     weak var presenter: DocumentCaptureInteractorOutputProtocol?
     private let uploadService: UploadServiceProtocol
-    private let eventLogger: EventLogging
 
     // MARK: - Initialization
 
-    init(uploadService: UploadServiceProtocol, eventLogger: EventLogging) {
+    init(uploadService: UploadServiceProtocol) {
         self.uploadService = uploadService
-        self.eventLogger = eventLogger
     }
 }
 
@@ -21,8 +19,6 @@ final class DocumentCaptureInteractor {
 extension DocumentCaptureInteractor: DocumentCaptureInteractorProtocol {
 
     func uploadDocument(_ image: UIImage) {
-
-        eventLogger.sendEvent("send_document")
 
         uploadService.upload(image: image) { [weak self] result in
             guard let self = self else { return }
@@ -57,13 +53,5 @@ extension DocumentCaptureInteractor: DocumentCaptureInteractorProtocol {
         let userEntity = UserSelectionEntity.UserEntity(country: country, document: document, birthDate: birthDate)
         let response = UserSelectionEntity.Response(selection: userEntity)
         presenter?.didRetrieveSelection(response)
-    }
-
-    func sendEventUploadDocumentSuccessfully() {
-        eventLogger.sendEvent("upload_document_successfully")
-    }
-
-    func sendEventFailToUploadDocument() {
-        eventLogger.sendEvent("fail_to_upload_document")
     }
 }

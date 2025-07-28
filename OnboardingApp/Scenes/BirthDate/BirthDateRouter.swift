@@ -12,12 +12,13 @@ final class BirthDateRouter {
     static func createModule(coordinator: AppCoordinator) -> UIViewController {
         let view = BirthDateViewController()
         let eventLogger = ConsoleEventLogger()
-        let interactor = BirthDateInteractor(eventLogger: eventLogger)
+        let interactor = BirthDateInteractor()
         let router = BirthDateRouter()
         let presenter = BirthDatePresenter(
             view: view,
             interactor: interactor,
-            router: router
+            router: router,
+            eventLogger: eventLogger
         )
 
         view.presenter = presenter

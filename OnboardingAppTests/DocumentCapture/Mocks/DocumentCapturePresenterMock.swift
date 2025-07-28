@@ -3,9 +3,9 @@ import Foundation
 
 final class DocumentCapturePresenterMock: DocumentCaptureInteractorOutputProtocol {
 
-    var didUploadSuccessfullyCalled = false
-    var didFailToUploadCalled = false
-    var retrievedSelection: UserSelectionEntity.UserEntity?
+    private(set) var didUploadSuccessfullyCalled = false
+    private(set) var didFailToUploadCalled = false
+    private(set) var retrievedSelection: UserSelectionEntity.UserEntity?
 
     func didRetrieveSelection(_ response: UserSelectionEntity.Response) {
         retrievedSelection = response.selection

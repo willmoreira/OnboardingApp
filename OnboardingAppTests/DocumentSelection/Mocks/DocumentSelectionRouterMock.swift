@@ -2,7 +2,8 @@
 
 final class DocumentSelectionRouterMock: DocumentSelectionRouterProtocol {
 
-    var navigated = false
+    private(set) var navigated = false
+
     func navigateToDocumentCapture() {
         navigated = true
     }

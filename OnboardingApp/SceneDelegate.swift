@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  OnboardingApp
-//
-//  Created by William on 24/07/25.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -41,13 +34,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func buildCountrySelectionUITest() -> UIViewController {
         let view = CountrySelectionViewController()
-
+        let eventLogger = ConsoleEventLogger()
         let interactor = CountrySelectionInteractorMock()
         let router = CountrySelectionRouterMock(viewController: view)
         let presenter = CountrySelectionPresenter(
             view: view,
             interactor: interactor,
-            router: router
+            router: router,
+            eventLogger: eventLogger
         )
 
         interactor.output = presenter

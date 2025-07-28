@@ -2,6 +2,7 @@ import Foundation
 @testable import OnboardingApp
 
 final class EventLoggerMock: EventLogging {
+
     private(set) var loggedEvents: [(event: String, parameters: [String: Any]?)] = []
 
     func sendEvent(_ event: String) {

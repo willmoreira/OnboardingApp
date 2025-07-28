@@ -3,7 +3,7 @@ import Foundation
 
 final class DocumentCaptureRouterMock: DocumentCaptureRouterProtocol {
 
-    var restartFlowCalled = false
+    private(set) var restartFlowCalled = false
 
     func restartFlow() {
         restartFlowCalled = true

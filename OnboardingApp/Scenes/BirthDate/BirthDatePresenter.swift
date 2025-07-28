@@ -8,15 +8,19 @@ final class BirthDatePresenter {
 
     var interactor: BirthDateInteractorProtocol
     var router: BirthDateRouterProtocol
+    private let eventLogger: EventLogging
 
     // MARK: - Initialization
 
     init(view: BirthDateViewProtocol,
          interactor: BirthDateInteractorProtocol,
-         router: BirthDateRouterProtocol) {
+         router: BirthDateRouterProtocol,
+         eventLogger: EventLogging
+    ) {
         self.view = view
         self.interactor = interactor
         self.router = router
+        self.eventLogger = eventLogger
     }
 }
 
@@ -26,6 +30,7 @@ extension BirthDatePresenter: BirthDatePresenterProtocol {
 
     func goToDocumentCapture() {
         interactor.saveBirthDate()
+        eventLogger.sendEvent("tapped_go_to_document_capture")
         router.routeToDocumentCapture()
     }
 

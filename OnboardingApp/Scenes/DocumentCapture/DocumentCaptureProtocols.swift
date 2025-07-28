@@ -18,8 +18,6 @@ protocol DocumentCapturePresenterProtocol: AnyObject {
 protocol DocumentCaptureInteractorProtocol: AnyObject {
     func uploadDocument(_ image: UIImage)
     func fetchSavedSelection()
-    func sendEventUploadDocumentSuccessfully()
-    func sendEventFailToUploadDocument()
 }
 
 protocol DocumentCaptureInteractorOutputProtocol: AnyObject {

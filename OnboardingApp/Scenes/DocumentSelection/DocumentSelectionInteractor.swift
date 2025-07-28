@@ -6,13 +6,11 @@ final class DocumentSelectionInteractor {
 
     weak var presenter: DocumentSelectionInteractorOutputProtocol?
     let country: CountrySelectionEntity.UserEntity
-    private let eventLogger: EventLogging
 
     // MARK: - Initialization
 
-    init(country: CountrySelectionEntity.UserEntity, eventLogger: EventLogging) {
+    init(country: CountrySelectionEntity.UserEntity) {
         self.country = country
-        self.eventLogger = eventLogger
     }
 }
 
@@ -42,13 +40,6 @@ extension DocumentSelectionInteractor: DocumentSelectionInteractorProtocol {
 
         let response = DocumentSelectionEntity.Response(documents: documents)
         presenter?.didFetchDocuments(response)
-    }
-
-    func sendEvent(request: DocumentSelectionEntity.Request) {
-        eventLogger.sendEvent(
-            "tapped_select_document",
-            parameters: ["document": request.entity.name]
-        )
     }
 
     func saveSelectedCountryAndDocument(request: DocumentSelectionEntity.Request) {

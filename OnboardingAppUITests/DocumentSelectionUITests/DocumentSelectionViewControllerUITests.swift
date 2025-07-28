@@ -2,9 +2,11 @@ import XCTest
 
 final class DocumentSelectionViewControllerUITests: XCTestCase {
 
+    private var app: XCUIApplication!
+
     override func setUp() {
         continueAfterFailure = false
-        let app = XCUIApplication()
+        app = XCUIApplication()
         app.launchArguments.append("-UITestDocumentSelection")
         app.launch()
     }

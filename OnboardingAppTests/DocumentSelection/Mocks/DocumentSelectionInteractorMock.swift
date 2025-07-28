@@ -3,12 +3,12 @@ import Foundation
 
 final class DocumentSelectionInteractorMock: DocumentSelectionInteractorProtocol {
 
-    var fetchDocumentsCalled = false
-    var sendEventCalled = false
-    var saveSelectedCalled = false
+    private(set) var fetchDocumentsCalled = false
+    private(set) var sendEventCalled = false
+    private(set) var saveSelectedCalled = false
 
-    var sentRequestForEvent: DocumentSelectionEntity.Request?
-    var sentRequestForSave: DocumentSelectionEntity.Request?
+    private(set) var sentRequestForEvent: DocumentSelectionEntity.Request?
+    private(set) var sentRequestForSave: DocumentSelectionEntity.Request?
 
     func fetchDocuments() {
         fetchDocumentsCalled = true

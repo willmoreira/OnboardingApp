@@ -7,15 +7,20 @@ final class DocumentSelectionPresenterTests: XCTestCase {
     private var mockInteractor: DocumentSelectionInteractorMock!
     private var mockRouter: DocumentSelectionRouterMock!
     private var presenter: DocumentSelectionPresenter!
+    private var mockLogger: EventLoggerMock!
 
     override func setUp() {
         super.setUp()
         mockView = DocumentSelectionViewMock()
         mockInteractor = DocumentSelectionInteractorMock()
         mockRouter = DocumentSelectionRouterMock()
-        presenter = DocumentSelectionPresenter(view: mockView,
-                                               interactor: mockInteractor,
-                                               router: mockRouter)
+        mockLogger = EventLoggerMock()
+        presenter = DocumentSelectionPresenter(
+            view: mockView,
+            interactor: mockInteractor,
+            router: mockRouter,
+            eventLogger: mockLogger
+        )
     }
 
     override func tearDown() {
@@ -23,6 +28,7 @@ final class DocumentSelectionPresenterTests: XCTestCase {
         mockInteractor = nil
         mockRouter = nil
         presenter = nil
+        mockLogger = nil
         super.tearDown()
     }
 
@@ -46,15 +52,11 @@ final class DocumentSelectionPresenterTests: XCTestCase {
 
         // Then
         XCTAssertEqual(mockView.shownDocuments, docs)
-        // Se quiser testar a country guardada no presenter (private), pode expor um getter só para teste ou ignorar.
     }
 
-    func test_didTapNext_callsSaveSendEventAndNavigate() {
+    func test_didTapNext_callsNavigate() {
         // Given
         let document = DocumentSelectionEntity.UserEntity(name: "CNH", iconName: "car.fill")
-        mockInteractor.saveSelectedCalled = false
-        mockInteractor.sendEventCalled = false
-        mockRouter.navigated = false
 
         // When
         presenter.didTapNext(with: document)
@@ -62,8 +64,6 @@ final class DocumentSelectionPresenterTests: XCTestCase {
         // Then
         XCTAssertTrue(mockInteractor.saveSelectedCalled)
         XCTAssertEqual(mockInteractor.sentRequestForSave?.entity, document)
-        XCTAssertTrue(mockInteractor.sendEventCalled)
-        XCTAssertEqual(mockInteractor.sentRequestForEvent?.entity, document)
         XCTAssertTrue(mockRouter.navigated)
     }
 }

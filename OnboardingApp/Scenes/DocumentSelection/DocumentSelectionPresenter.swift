@@ -6,15 +6,18 @@ final class DocumentSelectionPresenter {
     private let interactor: DocumentSelectionInteractorProtocol
     private let router: DocumentSelectionRouterProtocol
     private var selectedCountry: CountrySelectionEntity.UserEntity?
+    private let eventLogger: EventLogging
 
     // MARK: - Initialization
 
     init(view: DocumentSelectionViewProtocol,
          interactor: DocumentSelectionInteractorProtocol,
-         router: DocumentSelectionRouterProtocol) {
+         router: DocumentSelectionRouterProtocol,
+         eventLogger: EventLogging) {
         self.view = view
         self.interactor = interactor
         self.router = router
+        self.eventLogger = eventLogger
     }
 }
 
@@ -29,8 +32,11 @@ extension DocumentSelectionPresenter: DocumentSelectionPresenterProtocol {
     func didTapNext(with document: DocumentSelectionEntity.UserEntity) {
         let request = DocumentSelectionEntity.Request(entity: document)
         interactor.saveSelectedCountryAndDocument(request: request)
-        interactor.sendEvent(request: request)
         router.navigateToDocumentCapture()
+        eventLogger.sendEvent(
+            "tapped_select_document",
+            parameters: ["document": request.entity.name]
+        )
     }
 }
 

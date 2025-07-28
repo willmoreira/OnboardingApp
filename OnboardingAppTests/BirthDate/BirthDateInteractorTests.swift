@@ -5,13 +5,11 @@ final class BirthDateInteractorTests: XCTestCase {
 
     private var interactor: BirthDateInteractor!
     private var mockPresenter: BirthDatePresenterMock!
-    private var mockLogger: EventLoggerMock!
 
     override func setUp() {
         super.setUp()
         mockPresenter = BirthDatePresenterMock()
-        mockLogger = EventLoggerMock()
-        interactor = BirthDateInteractor(eventLogger: mockLogger)
+        interactor = BirthDateInteractor()
         interactor.presenter = mockPresenter
         UserDefaults.standard.removeObject(forKey: "birthDate")
     }
@@ -19,43 +17,45 @@ final class BirthDateInteractorTests: XCTestCase {
     override func tearDown() {
         interactor = nil
         mockPresenter = nil
-        mockLogger = nil
         super.tearDown()
     }
 
     func testValidateBirthDate_whenDateIsValid_shouldCallPresenterWithIsValidTrue() {
-        // Arrange
+        // Given
         let validDate = Calendar.current.date(byAdding: .year, value: -20, to: Date())!
         let request = BirthDateEntity.Request(entity: .init(date: validDate))
 
-        // Act
+        // When
         interactor.validateBirthDate(request)
 
-        // Assert
+        // Then
         XCTAssertTrue(mockPresenter.presentValidationCalled)
         XCTAssertEqual(mockPresenter.receivedResponse?.isValid, true)
     }
 
     func testValidateBirthDate_whenDateIsInvalid_shouldCallPresenterWithIsValidFalse() {
-        // Arrange
+        // Given
         let invalidDate = Calendar.current.date(byAdding: .year, value: -10, to: Date())!
         let request = BirthDateEntity.Request(entity: .init(date: invalidDate))
 
-        // Act
+        // When
         interactor.validateBirthDate(request)
 
-        // Assert
+        // Then
         XCTAssertTrue(mockPresenter.presentValidationCalled)
         XCTAssertEqual(mockPresenter.receivedResponse?.isValid, false)
     }
 
     func testSaveBirthDate_whenValidDateWasSet_shouldSaveToUserDefaults() {
+        // Given
         let validDate = Calendar.current.date(byAdding: .year, value: -25, to: Date())!
         let request = BirthDateEntity.Request(entity: .init(date: validDate))
         interactor.validateBirthDate(request)
 
+        // When
         interactor.saveBirthDate()
 
+        // Then
         let savedDate = UserDefaults.standard.getDecodable(forKey: "birthDate", as: Date.self)
 
         guard let savedTime = savedDate?.timeIntervalSince1970 else {
@@ -66,10 +66,10 @@ final class BirthDateInteractorTests: XCTestCase {
     }
 
     func testSaveBirthDate_whenNoDateWasValidated_shouldNotSave() {
-        // Act
+        // When
         interactor.saveBirthDate()
 
-        // Assert
+        // Then
         let savedDate = UserDefaults.standard.getDecodable(forKey: "birthDate", as: Date.self)
         XCTAssertNil(savedDate)
     }

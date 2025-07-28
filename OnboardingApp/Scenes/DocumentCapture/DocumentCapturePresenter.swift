@@ -7,6 +7,7 @@ final class DocumentCapturePresenter {
     weak var view: DocumentCaptureViewProtocol?
     private let interactor: DocumentCaptureInteractorProtocol
     private let router: DocumentCaptureRouterProtocol
+    private let eventLogger: EventLogging
 
     // MARK: - Properties
 
@@ -17,10 +18,12 @@ final class DocumentCapturePresenter {
 
     init(view: DocumentCaptureViewProtocol,
          interactor: DocumentCaptureInteractorProtocol,
-         router: DocumentCaptureRouterProtocol) {
+         router: DocumentCaptureRouterProtocol,
+         eventLogger: EventLogging) {
         self.view = view
         self.interactor = interactor
         self.router = router
+        self.eventLogger = eventLogger
     }
 }
 
@@ -39,6 +42,7 @@ extension DocumentCapturePresenter: DocumentCapturePresenterProtocol {
         }
 
         view?.showLoading(true)
+        eventLogger.sendEvent("send_document")
         interactor.uploadDocument(image)
     }
 
@@ -89,13 +93,13 @@ extension DocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
     }
 
     func didUploadDocumentSuccessfully() {
-        interactor.sendEventUploadDocumentSuccessfully()
+        eventLogger.sendEvent("upload_document_successfully")
         view?.showLoading(false)
         view?.showSuccessMessage()
     }
 
     func didFailToUploadDocument() {
-        interactor.sendEventFailToUploadDocument()
+        eventLogger.sendEvent("fail_to_upload_document")
         view?.showLoading(false)
         view?.showErrorMessage()
     }

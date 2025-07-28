@@ -5,11 +5,11 @@ final class DocumentCaptureInteractorMock: DocumentCaptureInteractorProtocol {
 
     weak var presenter: DocumentCaptureInteractorOutputProtocol?
 
-    var fetchSavedSelectionCalled = false
-    var uploadDocumentCalled = false
-    var sendEventUploadDocumentSuccessfullyCalled = false
-    var sendEventFailToUploadDocumentCalled = false
-    var uploadedImage: UIImage?
+    private(set) var fetchSavedSelectionCalled = false
+    private(set) var uploadDocumentCalled = false
+    private(set) var sendEventUploadDocumentSuccessfullyCalled = false
+    private(set) var sendEventFailToUploadDocumentCalled = false
+    private(set) var uploadedImage: UIImage?
 
     func fetchSavedSelection() {
         fetchSavedSelectionCalled = true

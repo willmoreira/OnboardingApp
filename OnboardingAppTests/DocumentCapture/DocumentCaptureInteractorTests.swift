@@ -6,17 +6,16 @@ final class DocumentCaptureInteractorTests: XCTestCase {
     private var interactor: DocumentCaptureInteractor!
     private var mockPresenter: DocumentCapturePresenterMock!
     private var mockUploadService: UploadServiceMock!
-    private var mockLogger: EventLoggerMock!
 
     override func setUp() {
         super.setUp()
         UserDefaults.standard.removeObject(forKey: "selectedCountry")
         UserDefaults.standard.removeObject(forKey: "selectedDocument")
+        UserDefaults.standard.removeObject(forKey: "birthDate")
 
         mockPresenter = DocumentCapturePresenterMock()
         mockUploadService = UploadServiceMock()
-        mockLogger = EventLoggerMock()
-        interactor = DocumentCaptureInteractor(uploadService: mockUploadService, eventLogger: mockLogger)
+        interactor = DocumentCaptureInteractor(uploadService: mockUploadService)
         interactor.presenter = mockPresenter
 
         let country = CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "br")
@@ -32,7 +31,6 @@ final class DocumentCaptureInteractorTests: XCTestCase {
         interactor = nil
         mockPresenter = nil
         mockUploadService = nil
-        mockLogger = nil
         super.tearDown()
     }
 
@@ -44,7 +42,6 @@ final class DocumentCaptureInteractorTests: XCTestCase {
         interactor.uploadDocument(UIImage())
 
         // Then
-        XCTAssertTrue(mockLogger.loggedEvents.contains { $0.event == "send_document" })
         XCTAssertTrue(mockPresenter.didUploadSuccessfullyCalled)
     }
 
@@ -64,25 +61,7 @@ final class DocumentCaptureInteractorTests: XCTestCase {
         interactor.fetchSavedSelection()
 
         // Then
-        // No mockPresenter você precisa ter propriedades para capturar o que foi recebido
         XCTAssertEqual(mockPresenter.retrievedSelection?.country.name, "Brasil")
         XCTAssertEqual(mockPresenter.retrievedSelection?.document.name, "CNH")
-        // Data de nascimento pode ser testada se quiser, ou ignorada
-    }
-
-    func test_sendEventUploadDocumentSuccessfully_logsCorrectEvent() {
-        // When
-        interactor.sendEventUploadDocumentSuccessfully()
-
-        // Then
-        XCTAssertTrue(mockLogger.loggedEvents.contains { $0.event == "upload_document_successfully" })
-    }
-
-    func test_sendEventFailToUploadDocument_logsCorrectEvent() {
-        // When
-        interactor.sendEventFailToUploadDocument()
-
-        // Then
-        XCTAssertTrue(mockLogger.loggedEvents.contains { $0.event == "fail_to_upload_document" })
     }
 }

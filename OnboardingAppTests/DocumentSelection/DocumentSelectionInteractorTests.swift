@@ -7,13 +7,13 @@ final class DocumentSelectionInteractorTests: XCTestCase {
     private var mockPresenter: DocumentSelectionPresenterMock!
     private var mockLogger: EventLoggerMock!
     private var interactor: DocumentSelectionInteractor!
-    let brazilCountry = CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "br")
+    private let brazilCountry = CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "br")
 
     override func setUp() {
         super.setUp()
         mockPresenter = DocumentSelectionPresenterMock()
         mockLogger = EventLoggerMock()
-        interactor = DocumentSelectionInteractor(country: brazilCountry, eventLogger: mockLogger)
+        interactor = DocumentSelectionInteractor(country: brazilCountry)
         interactor.presenter = mockPresenter
     }
 
@@ -31,19 +31,6 @@ final class DocumentSelectionInteractorTests: XCTestCase {
         // Then
         XCTAssertFalse(mockPresenter.receivedDocuments.isEmpty)
         XCTAssertEqual(interactor.country.name, "Brasil")
-    }
-
-    func test_sendEvent_logsCorrectEvent() {
-        // Given
-        let document = DocumentSelectionEntity.UserEntity(name: "CNH", iconName: "car.fill")
-        let request = DocumentSelectionEntity.Request(entity: document)
-
-        // When
-        interactor.sendEvent(request: request)
-
-        // Then
-        XCTAssertTrue(mockLogger.loggedEvents.contains(where: { $0.event == "tapped_select_document" }))
-        XCTAssertTrue(mockPresenter.receivedResponse == nil || true) // presenter não recebe nesse método
     }
 
     func test_saveSelectedCountryAndDocument_savesToUserDefaults() {
@@ -67,7 +54,7 @@ final class DocumentSelectionInteractorTests: XCTestCase {
     func test_fetchDocuments_forUnitedStates_returnsCorrectDocuments() {
         // Given
         let usaCountry = CountrySelectionEntity.UserEntity(name: "Estados Unidos", flagImageName: "us")
-        let interactor = DocumentSelectionInteractor(country: usaCountry, eventLogger: mockLogger)
+        let interactor = DocumentSelectionInteractor(country: usaCountry)
         interactor.presenter = mockPresenter
 
         // When
@@ -82,7 +69,7 @@ final class DocumentSelectionInteractorTests: XCTestCase {
     func test_fetchDocuments_forOtherCountry_returnsPassportOnly() {
         // Given
         let germany = CountrySelectionEntity.UserEntity(name: "Alemanha", flagImageName: "de")
-        let interactor = DocumentSelectionInteractor(country: germany, eventLogger: mockLogger)
+        let interactor = DocumentSelectionInteractor(country: germany)
         interactor.presenter = mockPresenter
 
         // When

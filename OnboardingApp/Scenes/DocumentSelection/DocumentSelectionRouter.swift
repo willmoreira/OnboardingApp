@@ -14,9 +14,14 @@ final class DocumentSelectionRouter {
     ) -> UIViewController {
         let view = DocumentSelectionViewController()
         let eventLogger = ConsoleEventLogger()
-        let interactor = DocumentSelectionInteractor(country: country, eventLogger: eventLogger)
+        let interactor = DocumentSelectionInteractor(country: country)
         let router = DocumentSelectionRouter()
-        let presenter = DocumentSelectionPresenter(view: view, interactor: interactor, router: router)
+        let presenter = DocumentSelectionPresenter(
+            view: view,
+            interactor: interactor,
+            router: router,
+            eventLogger: eventLogger
+        )
 
         view.presenter = presenter
         interactor.presenter = presenter

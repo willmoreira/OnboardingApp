@@ -15,6 +15,8 @@ final class BirthDateViewController: UIViewController {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isAccessibilityElement = true
+        label.accessibilityLabel = "Escolha sua data de nascimento. Precisa ser maior de 18 anos."
         return label
     }()
 
@@ -27,6 +29,9 @@ final class BirthDateViewController: UIViewController {
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.accessibilityIdentifier = "birthDatePickerIdentifier"
         picker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        picker.isAccessibilityElement = true
+        picker.accessibilityLabel = "Selecionar data de nascimento"
+        picker.accessibilityHint = "Use os seletores para escolher sua data de nascimento. Deve ser maior de 18 anos."
         return picker
     }()
 
@@ -41,11 +46,11 @@ final class BirthDateViewController: UIViewController {
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 8
         button.tintColor = .systemGreen
-        button.isEnabled = true
+        button.isEnabled = false
         button.alpha = 0.3
         button.isAccessibilityElement = true
         button.accessibilityLabel = "Avançar"
-        button.accessibilityHint = "Selecione um país para ativar este botão"
+        button.accessibilityHint = "Avança para a próxima etapa se a data for válida"
         button.accessibilityTraits = .button
         button.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
         return button
@@ -58,8 +63,9 @@ final class BirthDateViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupLayout()
         setPickerInitalDate()
+        view.accessibilityElements = [titleLabel, datePicker, nextButton]
     }
-    
+
     private func setPickerInitalDate() {
         if let eighteenYearsAgo = Calendar.current.date(byAdding: .year, value: -18, to: Date()) {
             datePicker.date = eighteenYearsAgo
@@ -123,10 +129,9 @@ extension BirthDateViewController: BirthDateViewProtocol {
     func displayValidation(_ viewModel: BirthDateEntity.ViewModel) {
         isBirthDateValid = viewModel.isValid
         nextButton.isEnabled = viewModel.isValid
-        nextButton.alpha = 1.0
+        nextButton.alpha = viewModel.isValid ? 1.0 : 0.3
 
         if !viewModel.isValid {
-            nextButton.alpha = 0.3
             showUnderageAlert()
         }
     }

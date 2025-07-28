@@ -5,13 +5,9 @@ final class BirthDateInteractor {
     // MARK: - Properties
 
     weak var presenter: BirthDateInteractorOutputProtocol?
-    private let eventLogger: EventLogging
     private var birthday: Date?
-    // MARK: - Initialization
 
-    init(eventLogger: EventLogging) {
-        self.eventLogger = eventLogger
-    }
+    // MARK: - Initialization
 
     private var minimumAllowedDate: Date? {
         Calendar.current.date(byAdding: .year, value: -18, to: Date())

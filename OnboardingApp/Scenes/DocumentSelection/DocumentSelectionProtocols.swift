@@ -9,10 +9,10 @@ protocol DocumentSelectionPresenterProtocol: AnyObject {
 
 protocol DocumentSelectionInteractorProtocol: AnyObject {
     func fetchDocuments()
-    func sendEvent(request: DocumentSelectionEntity.Request)
     func saveSelectedCountryAndDocument(request: DocumentSelectionEntity.Request)
 }
 
+// swiftlint:disable:next type_name
 protocol DocumentSelectionInteractorOutputProtocol: AnyObject {
     func didFetchDocuments(_ response: DocumentSelectionEntity.Response)
 }

@@ -5,15 +5,18 @@ final class CountrySelectionPresenter {
     weak var view: CountrySelectionViewProtocol?
     var interactor: CountrySelectionInteractorProtocol
     var router: CountrySelectionRouterProtocol
+    private let eventLogger: EventLogging
 
     // MARK: - Initialization
 
     init(view: CountrySelectionViewProtocol,
          interactor: CountrySelectionInteractorProtocol,
-         router: CountrySelectionRouterProtocol) {
+         router: CountrySelectionRouterProtocol,
+         eventLogger: EventLogging) {
         self.view = view
         self.interactor = interactor
         self.router = router
+        self.eventLogger = eventLogger
     }
 }
 
@@ -22,13 +25,12 @@ final class CountrySelectionPresenter {
 extension CountrySelectionPresenter: CountrySelectionPresenterProtocol {
 
     func viewDidLoad() {
-        // Cria um request vazio (sem filtro, por exemplo)
         let request = CountrySelectionEntity.Request(entity: CountrySelectionEntity.UserEntity(name: "", flagImageName: ""))
         interactor.fetchCountries(request: request)
     }
 
     func didTapNext(with request: CountrySelectionEntity.Request) {
-        interactor.sendEventTap(with: request)
+        eventLogger.sendEvent("tapped_select_country", parameters: ["country": request.entity.name])
         router.navigateToDocumentSelection(with: request.entity)
     }
 }

@@ -12,12 +12,13 @@ final class CountrySelectionRouter {
     static func createModule(coordinator: AppCoordinator) -> UIViewController {
         let view = CountrySelectionViewController()
         let eventLogger = ConsoleEventLogger()
-        let interactor = CountrySelectionInteractor(eventLogger: eventLogger)
+        let interactor = CountrySelectionInteractor()
         let router = CountrySelectionRouter()
         let presenter = CountrySelectionPresenter(
             view: view,
             interactor: interactor,
-            router: router
+            router: router,
+            eventLogger: eventLogger
         )
 
         view.presenter = presenter
