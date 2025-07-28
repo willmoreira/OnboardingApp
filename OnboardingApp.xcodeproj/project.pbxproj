@@ -45,22 +45,6 @@
 			);
 			target = 3DE306682E32D83E00117698 /* OnboardingAppUITests */;
 		};
-		3DD5BA052E3487A900137123 /* Exceptions for "OnboardingAppUITests" folder in "OnboardingApp" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				CountrySelectionUI/Mocks/CountrySelectionInteractorMock.swift,
-				CountrySelectionUI/Mocks/CountrySelectionRouterMock.swift,
-			);
-			target = 3DE306482E32D83D00117698 /* OnboardingApp */;
-		};
-		3DD5BA062E3487A900137123 /* Exceptions for "OnboardingAppUITests" folder in "OnboardingAppUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				CountrySelectionUI/Mocks/CountrySelectionInteractorMock.swift,
-				CountrySelectionUI/Mocks/CountrySelectionRouterMock.swift,
-			);
-			target = 3DE306682E32D83E00117698 /* OnboardingAppUITests */;
-		};
 		3DE306712E32D83E00117698 /* Exceptions for "OnboardingApp" folder in "OnboardingApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -88,10 +72,6 @@
 		};
 		3DE3066C2E32D83E00117698 /* OnboardingAppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				3DD5BA052E3487A900137123 /* Exceptions for "OnboardingAppUITests" folder in "OnboardingApp" target */,
-				3DD5BA062E3487A900137123 /* Exceptions for "OnboardingAppUITests" folder in "OnboardingAppUITests" target */,
-			);
 			path = OnboardingAppUITests;
 			sourceTree = "<group>";
 		};

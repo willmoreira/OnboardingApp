@@ -27,6 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = buildDocumentSelectionUITest()
         } else if CommandLine.arguments.contains("-UITestDocumentCapture") {
             window.rootViewController = buildDocumentCaptureUITest()
+        } else if CommandLine.arguments.contains("-UITestBirthDate") {
+            window.rootViewController = buildBirthDateViewControllerForUITest()
         } else {
             let navController = UINavigationController()
             appCoordinator = AppCoordinator(navigationController: navController)
@@ -38,38 +40,49 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func buildCountrySelectionUITest() -> UIViewController {
-        let viewController = CountrySelectionViewController()
+        let view = CountrySelectionViewController()
 
         let interactor = CountrySelectionInteractorMock()
-        let router = CountrySelectionRouterMock(viewController: viewController)
+        let router = CountrySelectionRouterMock(viewController: view)
         let presenter = CountrySelectionPresenter(
-            view: viewController,
+            view: view,
             interactor: interactor,
             router: router
         )
 
         interactor.output = presenter
-        viewController.presenter = presenter
+        view.presenter = presenter
 
-        return UINavigationController(rootViewController: viewController)
+        return UINavigationController(rootViewController: view)
     }
 
     func buildDocumentSelectionUITest() -> UIViewController {
         let view = DocumentSelectionViewController()
+
         let presenter = DocumentSelectionPresenterUITestMock()
         presenter.view = view
         view.presenter = presenter
+
         return UINavigationController(rootViewController: view)
     }
 
-    func buildDocumentCaptureUITest() -> UIViewController {
-        let viewController = DocumentCaptureViewController()
+    func buildBirthDateViewControllerForUITest() -> BirthDateViewController {
+        let view = BirthDateViewController()
 
-        let presenter = DocumentCapturePresenterUITestMock()
-        presenter.view = viewController
-        viewController.presenter = presenter
+        let presenter = BirthDatePresenterUITestMock()
+        presenter.view = view
+        view.presenter = presenter
 
-        return viewController
+        return view
     }
 
+    func buildDocumentCaptureUITest() -> UIViewController {
+        let view = DocumentCaptureViewController()
+
+        let presenter = DocumentCapturePresenterUITestMock()
+        presenter.view = view
+        view.presenter = presenter
+
+        return view
+    }
 }

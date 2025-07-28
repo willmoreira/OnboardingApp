@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F54B5C86-F0C8-4816-86A2-E3CE390B0819"
+            uuid = "84B33E39-3CD6-47C4-BBC4-B430E2B332F6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OnboardingApp/Scenes/DocumentSelection/DocumentSelectionViewController.swift"
+            filePath = "OnboardingApp/Scenes/DocumentCapture/DocumentCaptureInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "nextButtonTapped()"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "fetchSavedSelection()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

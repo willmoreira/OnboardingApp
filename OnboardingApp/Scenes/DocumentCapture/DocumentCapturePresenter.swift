@@ -75,6 +75,8 @@ extension DocumentCapturePresenter: DocumentCaptureInteractorOutputProtocol {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "pt_BR")
+
         let birthDateFormatted = formatter.string(from: selection.birthDate)
 
         let viewModel = UserSelectionEntity.ViewModel(

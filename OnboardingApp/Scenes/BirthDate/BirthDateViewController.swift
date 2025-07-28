@@ -25,11 +25,8 @@ final class BirthDateViewController: UIViewController {
         picker.preferredDatePickerStyle = .wheels
         picker.locale = Locale(identifier: "pt_BR")
         picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.accessibilityIdentifier = "birthDatePickerIdentifier"
         picker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-
-        if let eighteenYearsAgo = Calendar.current.date(byAdding: .year, value: -18, to: Date()) {
-            picker.date = eighteenYearsAgo
-        }
         return picker
     }()
 
@@ -60,11 +57,18 @@ final class BirthDateViewController: UIViewController {
         title = "Data de Nascimento"
         view.backgroundColor = .systemBackground
         setupLayout()
+        setPickerInitalDate()
+    }
+    
+    private func setPickerInitalDate() {
+        if let eighteenYearsAgo = Calendar.current.date(byAdding: .year, value: -18, to: Date()) {
+            datePicker.date = eighteenYearsAgo
+            let entity = BirthDateEntity.UserEntity(date: eighteenYearsAgo)
+            presenter?.validateBirthDate(BirthDateEntity.Request(entity: entity))
+        }
     }
 
     private func setupLayout() {
-        dateChanged(datePicker)
-
         view.addSubview(titleLabel)
         view.addSubview(datePicker)
         view.addSubview(nextButton)

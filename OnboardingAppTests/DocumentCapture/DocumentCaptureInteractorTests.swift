@@ -21,6 +21,9 @@ final class DocumentCaptureInteractorTests: XCTestCase {
 
         let country = CountrySelectionEntity.UserEntity(name: "Brasil", flagImageName: "br")
         let document = DocumentSelectionEntity.UserEntity(name: "CNH", iconName: "car.fill")
+        let birthDate = Calendar.current.date(byAdding: .year, value: -30, to: Date())
+
+        UserDefaults.standard.setEncodable(birthDate, forKey: "birthDate")
         UserDefaults.standard.setEncodable(country, forKey: "selectedCountry")
         UserDefaults.standard.setEncodable(document, forKey: "selectedDocument")
     }
